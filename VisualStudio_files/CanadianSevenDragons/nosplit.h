@@ -22,3 +22,11 @@ public:
 };
 
 #endif // !NOSPLIT_H
+
+class Joker:public NoSplit{
+
+};
+
+class StartCard :public NoSplit{
+
+};

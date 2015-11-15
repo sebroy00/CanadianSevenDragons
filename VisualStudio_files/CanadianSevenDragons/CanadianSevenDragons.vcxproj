@@ -20,10 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animalcard.h" />
+    <ClInclude Include="deck.h" />
+    <ClInclude Include="exeptions.h" />
+    <ClInclude Include="hand.h" />
     <ClInclude Include="nosplit.h" />
     <ClInclude Include="splitfour.h" />
     <ClInclude Include="splitthree.h" />
     <ClInclude Include="splittwo.h" />
+    <ClInclude Include="table.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nosplit.cpp" />

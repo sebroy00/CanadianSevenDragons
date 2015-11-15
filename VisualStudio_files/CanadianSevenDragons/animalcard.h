@@ -25,3 +25,19 @@ protected: //a determiner
 
 #endif // !ANIMALCARD_H
 
+class BearAction:public AnimalCard{
+
+};
+class DeerAction :public AnimalCard{
+
+};
+class MooseAction :public AnimalCard{
+
+};
+class WolfAction :public AnimalCard{
+
+};
+class HareAction :public AnimalCard{
+
+};
+
