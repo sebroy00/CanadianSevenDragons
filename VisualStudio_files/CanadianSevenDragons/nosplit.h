@@ -30,3 +30,19 @@ class Joker:public NoSplit{
 class StartCard :public NoSplit{
 
 };
+
+class BearAction :public NoSplit {
+
+};
+class DeerAction :public NoSplit {
+
+};
+class MooseAction :public NoSplit {
+
+};
+class WolfAction :public NoSplit {
+
+};
+class HareAction :public NoSplit {
+
+};

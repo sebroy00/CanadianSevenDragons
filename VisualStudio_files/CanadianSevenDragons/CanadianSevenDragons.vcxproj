@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="actioncard.h" />
     <ClInclude Include="animalcard.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="exeptions.h" />
