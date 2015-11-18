@@ -26,6 +26,8 @@ public:
 	virtual void printRow();
 
 	virtual bool findAnimal(string);
+
+	virtual string getAnimalAt(int);
 };
 
 

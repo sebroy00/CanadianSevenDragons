@@ -25,3 +25,7 @@ bool NoSplit::findAnimal(string _animal)
 			return true;
 	return false;
 }
+
+string NoSplit::getAnimalAt(int a) {
+	return d_animals[0]; //tous les animaux sont les memes, donc on peut retourne le premier element
+}

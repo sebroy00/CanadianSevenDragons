@@ -1,10 +1,53 @@
 #include "table.h"
 
+int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCard> card, int row, int col){
+	int count = 0;
+	/*Left*/
+	if (around[0] != 0) {
+		count += around[0]->getAnimalAt(1) == card->getAnimalAt(0) ? 1 : 0;
+		count += around[0]->getAnimalAt(3) == card->getAnimalAt(2) ? 1 : 0;
+	}
+	/*Top*/
+	if (around[1] != 0) {
+		count += around[1]->getAnimalAt(2) == card->getAnimalAt(0) ? 1 : 0;
+		count += around[1]->getAnimalAt(3) == card->getAnimalAt(1) ? 1 : 0;
+	}
+	/*Right*/
+	if (around[2] != 0) {
+		count += around[2]->getAnimalAt(0) == card->getAnimalAt(1) ? 1 : 0;
+		count += around[2]->getAnimalAt(2) == card->getAnimalAt(3) ? 1 : 0;
+	}
+	/*Bottom*/
+	if (around[3] != 0) {
+		count += around[3]->getAnimalAt(1) == card->getAnimalAt(3) ? 1 : 0;
+		count += around[3]->getAnimalAt(0) == card->getAnimalAt(0) ? 1 : 0;
+	}
+	return count;
+}
+
+int verif() {
+
+	return 0;
+}
+
 int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
-	/*A completer*/
 	/*Utiliser exception illegal placement*/
+
+	/*LEFT, TOP, RIGHT, BOTTOM*/
+	shared_ptr<AnimalCard> around[4];
+	around[0] = table[row][col - 1]; //left
+	around[1] = table[row - 1][col]; //top
+	around[2] = table[row][col + 1]; //right
+	around[3] = table[row + 1][col]; //bottom
+
+	int numConnections = isConnected(around, card, row, col);
+
+	if (numConnections == 0) {
+		/*?Throw exception?*/
+		return 0;
+	}
 	table[row][col] = card;
-	return 1;
+	return numConnections;
 }
 
 std::shared_ptr<AnimalCard> Table::pickAt(int row, int col) {

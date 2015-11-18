@@ -5,7 +5,9 @@ using namespace std;
 
 class SplitTwo : AnimalCard {
 
-	//variable d'instances 
+	Orientation d_orientation = Orientation::UP;
+	EvenOdd d_evenOdd = EvenOdd::EVEN;
+	string d_animals[4];
 
 public:
 	/*Constructeur 2 paramametre*/
@@ -19,6 +21,9 @@ public:
 
 	/*affiche les deux caractères correspondant de la carte.*/
 	virtual void printRow(EvenOdd);
+
+	/*Va chercher l'animal a cette position*/
+	virtual string getAnimalAt(int);
 };
 
 #endif // !SPLITTWO_H

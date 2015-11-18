@@ -23,6 +23,8 @@ public: //a determiner
 	virtual void printRow() = 0;
 
 	virtual bool findAnimal(string) = 0;
+
+	virtual string getAnimalAt(int) = 0;
 };
 
 #endif // !ANIMALCARD_H
