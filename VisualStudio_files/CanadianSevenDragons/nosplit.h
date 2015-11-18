@@ -3,13 +3,18 @@
 #include"animalcard.h"
 using namespace std;
 
-class NoSplit : AnimalCard{
+class NoSplit : public AnimalCard {
 
-	//variable d'instances 
+	Orientation d_orientation = Orientation::UP;
+	EvenOdd d_evenOdd = EvenOdd::EVEN;
+	string d_animals[4];
 
-public: 
+public:
 	/*Constructeur 1 paramametre*/
-	NoSplit(string) {}; 
+	NoSplit(string animal) {
+		for (int i = 0; i < 4; i++)
+			d_animals[i] = animal;
+	};
 
 	/*orientation reste toujours pareille*/
 	virtual void setOrientation(Orientation);
@@ -18,31 +23,22 @@ public:
 	virtual void setRow(EvenOdd);
 
 	/*affiche les deux caractères correspondant de la carte.*/
-	virtual void printRow(EvenOdd);
+	virtual void printRow();
+
+	virtual bool findAnimal(string);
+};
+
+
+class Joker :public NoSplit {
+
+public:
+	Joker() :  NoSplit("o") {};
+};
+
+class StartCard :public NoSplit {
+
+public:
+	StartCard() : NoSplit("c") {};
 };
 
 #endif // !NOSPLIT_H
-
-class Joker:public NoSplit{
-
-};
-
-class StartCard :public NoSplit{
-
-};
-
-class BearAction :public NoSplit {
-
-};
-class DeerAction :public NoSplit {
-
-};
-class MooseAction :public NoSplit {
-
-};
-class WolfAction :public NoSplit {
-
-};
-class HareAction :public NoSplit {
-
-};

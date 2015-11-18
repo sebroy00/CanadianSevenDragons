@@ -31,10 +31,12 @@
     <ClInclude Include="table.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="nosplit.cpp" />
     <ClCompile Include="splitfour.cpp" />
     <ClCompile Include="splitthree.cpp" />
     <ClCompile Include="splittwo.cpp" />
+    <ClCompile Include="table.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CAFFEA90-CFD7-460B-B4D0-68959C4575A7}</ProjectGuid>
