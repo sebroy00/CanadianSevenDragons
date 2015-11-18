@@ -51,24 +51,45 @@ void Table::printTable() {
 		}
 	}
 	bool printedRow = true;
+	bool coordColPrint = true;
+
 	for (int l = startRow; l <= endRow; l++) {
+		if (!coordColPrint) {
+			string colCoord(to_string(l).size() == 2 ? to_string(l) : " " + to_string(l));
+			cout << colCoord << "|";
+		}
+		else
+			cout << "   ";
 		for (int c1 = startCol; c1 <= endCol; c1++) {
-			if (table[l][c1] != 0) {
+			if (coordColPrint) {
+				cout << c1 << " ";
+			}
+			else if (table[l][c1] != 0) {
 				table[l][c1]->printRow();
-				/*cout << l << c1; //affiche la position*/
 			}
 			else
 				cout << "   "; //trois espaces
 		}
 		cout << endl;
+		if (!coordColPrint)
+			cout << "  |";
+		else
+			cout << "   ";
+
 		for (int c2 = startCol; c2 <= endCol; c2++) {
-			if (table[l][c2] != 0)
-					table[l][c2]->printRow();
-				/*cout << l << c2; //affiche la position*/
+			if (coordColPrint) {
+				cout << "__" << " ";
+			}
+			else if (table[l][c2] != 0)
+				table[l][c2]->printRow();
 			else
 				cout << "   "; //trois espaces
 		}
 		cout << endl;
+		if (coordColPrint) {
+			coordColPrint = false;
+			l--;
+		}
 	}
 
 }

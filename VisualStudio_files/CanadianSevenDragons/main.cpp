@@ -6,7 +6,7 @@
 void TEST_classeTable() {
 	Table table = Table();
 	shared_ptr<NoSplit> sptr(new NoSplit("o"));
-	table.addAt(sptr, 45, 50);
+	table.addAt(sptr, 5, 50);
 	table.addAt(sptr, 45, 51);
 	table.addAt(sptr, 53, 54);
 	table.addAt(sptr, 45, 55);
