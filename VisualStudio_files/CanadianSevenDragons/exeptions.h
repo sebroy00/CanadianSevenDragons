@@ -6,4 +6,8 @@
 class IllegalPlacement{
 
 };
+
+class MissingCard {
+
+};
 #endif // !EXCEPTION_H
