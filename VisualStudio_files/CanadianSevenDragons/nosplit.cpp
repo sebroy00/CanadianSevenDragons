@@ -9,11 +9,17 @@ void NoSplit::setRow(EvenOdd){
 }
 
 void NoSplit::printRow(){
-	if (d_orientation == UP && d_evenOdd == EVEN || d_orientation == DOWN && d_evenOdd == ODD) {
+	if (d_orientation == UP && d_evenOdd == EVEN){
 		cout << d_animals[0] << d_animals[1] << " ";
 	}
-	else if (d_orientation == DOWN && d_evenOdd == EVEN || d_orientation == UP && d_evenOdd == ODD) {
+	else if (d_orientation == UP && d_evenOdd == ODD) {
 		cout << d_animals[2] << d_animals[3] << " ";
+	}
+	else if (d_orientation == DOWN && d_evenOdd == EVEN) {
+		cout << d_animals[3] << d_animals[2] << " ";
+	}
+	else if (d_orientation == DOWN && d_evenOdd == ODD){ 
+		cout << d_animals[1] << d_animals[0] << " ";
 	}
 	setRow(d_evenOdd);
 }
