@@ -1,28 +1,46 @@
 #include "table.h"
 
 int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCard> card, int row, int col){
-	int count = 0;
+	int paired[4] = { 0,0,0,0 };
+
 	/*Left*/
 	if (around[0] != 0) {
-		count += around[0]->getAnimalAt(1) == card->getAnimalAt(0) ? 1 : 0;
-		count += around[0]->getAnimalAt(3) == card->getAnimalAt(2) ? 1 : 0;
+		paired[0] |= around[0]->getAnimalAt(1) == card->getAnimalAt(0);
+		paired[2] |= around[0]->getAnimalAt(3) == card->getAnimalAt(2) ? 1 : 0;
+		if (card->getAnimalAt(0) == card->getAnimalAt(2)) {
+			paired[0] |= paired[2];
+			paired[2] = 0; //on garde le compte pour seulement une carte
+		}
 	}
 	/*Top*/
 	if (around[1] != 0) {
-		count += around[1]->getAnimalAt(2) == card->getAnimalAt(0) ? 1 : 0;
-		count += around[1]->getAnimalAt(3) == card->getAnimalAt(1) ? 1 : 0;
+		paired[0] |= paired[0] || around[1]->getAnimalAt(2) == card->getAnimalAt(0) ? 1 : 0;
+		paired[1] |= paired[1] || around[1]->getAnimalAt(3) == card->getAnimalAt(1) ? 1 : 0;
+		if (card->getAnimalAt(0) == card->getAnimalAt(1)) {
+			paired[1] |= paired[0];
+			paired[0] = 0; //on garde le compte pour seulement une carte
+		}
 	}
 	/*Right*/
 	if (around[2] != 0) {
-		count += around[2]->getAnimalAt(0) == card->getAnimalAt(1) ? 1 : 0;
-		count += around[2]->getAnimalAt(2) == card->getAnimalAt(3) ? 1 : 0;
+		paired[1] |= around[2]->getAnimalAt(0) == card->getAnimalAt(1) ? 1 : 0;
+		paired[3] |= around[2]->getAnimalAt(2) == card->getAnimalAt(3) ? 1 : 0;
+		if (card->getAnimalAt(1) == card->getAnimalAt(3)) {
+			paired[3] |= paired[1];
+			paired[1] = 0; //on garde le compte pour seulement une carte
+		}
 	}
 	/*Bottom*/
 	if (around[3] != 0) {
-		count += around[3]->getAnimalAt(1) == card->getAnimalAt(3) ? 1 : 0;
-		count += around[3]->getAnimalAt(0) == card->getAnimalAt(0) ? 1 : 0;
+		paired[3] |= around[3]->getAnimalAt(1) == card->getAnimalAt(3) ? 1 : 0;
+		paired[2] |= around[3]->getAnimalAt(0) == card->getAnimalAt(2) ? 1 : 0;
+		if (card->getAnimalAt(3) == card->getAnimalAt(2)) {
+			paired[2] |= paired[3];
+			paired[3] = 0; //on garde le compte pour seulement une carte
+		}
 	}
-	return count;
+
+	return paired[0] + paired[1] + paired[2] + paired[3];
 }
 
 int verif() {
