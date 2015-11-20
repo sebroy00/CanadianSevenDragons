@@ -3,12 +3,7 @@
 #include"animalcard.h"
 using namespace std;
 
-class SplitFour : AnimalCard {
-
-	Orientation d_orientation = Orientation::UP;
-	EvenOdd d_evenOdd = EvenOdd::EVEN;
-	string d_animals[4];
-
+class SplitFour : public AnimalCard {
 public:
 	/*Constructeur 4 paramametre*/
 	SplitFour(string, string, string, string);

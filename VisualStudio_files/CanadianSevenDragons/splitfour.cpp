@@ -39,9 +39,5 @@ bool SplitFour::findAnimal(string _animal)
 }
 
 string SplitFour::getAnimalAt(int a) {
-	if (d_orientation == UP)
 		return d_animals[a];
-	else if (d_orientation == DOWN) {
-		return d_animals[abs(a - 3)];
-	}
 }

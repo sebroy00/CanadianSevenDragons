@@ -10,8 +10,10 @@ enum EvenOdd { EVEN, ODD };
 
 /*Classe Virtuelle*/
 class AnimalCard {
-	//variable d'instances 
-
+protected:
+	Orientation d_orientation = Orientation::UP;
+	EvenOdd d_evenOdd = EvenOdd::EVEN;
+	string d_animals[4];
 public: //a determiner
 	/*change l’orientation de la carte*/
 	virtual void setOrientation(Orientation) = 0;
