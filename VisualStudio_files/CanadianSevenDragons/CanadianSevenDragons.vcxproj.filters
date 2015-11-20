@@ -45,6 +45,9 @@
     <ClInclude Include="actioncard.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nosplit.cpp">
@@ -66,6 +69,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="hand.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

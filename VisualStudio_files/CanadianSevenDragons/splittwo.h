@@ -1,9 +1,12 @@
 #ifndef SPLITTWO_H
 #define SPLITTWO_H
 #include"animalcard.h"
+#include <stdio.h>     
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-class SplitTwo : AnimalCard {
+class SplitTwo : public AnimalCard {
 
 	Orientation d_orientation = Orientation::UP;
 	EvenOdd d_evenOdd = EvenOdd::EVEN;
@@ -11,7 +14,7 @@ class SplitTwo : AnimalCard {
 
 public:
 	/*Constructeur 2 paramametre*/
-	SplitTwo(string, string) {};
+	SplitTwo(string, string);
 
 	/*orientation change*/
 	virtual void setOrientation(Orientation);
@@ -20,7 +23,9 @@ public:
 	virtual void setRow(EvenOdd);
 
 	/*affiche les deux caractères correspondant de la carte.*/
-	virtual void printRow(EvenOdd);
+	virtual void printRow();
+
+	virtual bool findAnimal(string);
 
 	/*Va chercher l'animal a cette position*/
 	virtual string getAnimalAt(int);
