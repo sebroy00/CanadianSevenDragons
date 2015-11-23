@@ -5,6 +5,8 @@ AnimalCardFactory::AnimalCardFactory(){
 	
 	//5 action card
 	ActionCard ac;
+	//faire 5 cartes random
+	int premierPic = rand()%5;
 	
 	//20 cartes
 	SplitThree sth;
