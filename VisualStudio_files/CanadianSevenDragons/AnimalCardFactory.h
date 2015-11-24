@@ -8,6 +8,10 @@
 #include "actioncard.h"
 #include <memory>
 #include <list>
+#include <algorithm>
+#include <random>
+#include <chrono>
+#include <vector>
 
 enum Animal{loup, ours, orignal, lievre, cerf};
 
@@ -15,9 +19,7 @@ class AnimalCardFactory{
 
 	//5 ActionCard, 10 SplitTwo, 20 SplitThree and 15 SplitFour
 	ActionCard *actionCards;
-	SplitTwo *splitTwoCards;
-	SplitThree *splitThreeCards;
-	SplitFour *splitFourCards;
+	AnimalCard *animalCards;
 
 public:
 

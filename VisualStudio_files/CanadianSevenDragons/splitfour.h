@@ -3,7 +3,7 @@
 #include"animalcard.h"
 using namespace std;
 
-class SplitFour : AnimalCard {
+class SplitFour : public AnimalCard {
 
 	Orientation d_orientation = Orientation::UP;
 	EvenOdd d_evenOdd = EvenOdd::EVEN;
