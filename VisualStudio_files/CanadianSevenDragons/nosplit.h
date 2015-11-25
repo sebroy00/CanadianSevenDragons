@@ -5,10 +5,6 @@ using namespace std;
 
 class NoSplit : public AnimalCard {
 
-	Orientation d_orientation = Orientation::UP;
-	EvenOdd d_evenOdd = EvenOdd::EVEN;
-	string d_animals[4];
-
 public:
 	/*Constructeur 1 paramametre*/
 	NoSplit(string animal) {
