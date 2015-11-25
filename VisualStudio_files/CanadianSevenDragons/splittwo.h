@@ -7,6 +7,11 @@
 using namespace std;
 
 class SplitTwo : public AnimalCard {
+
+	Orientation d_orientation = Orientation::UP;
+	EvenOdd d_evenOdd = EvenOdd::EVEN;
+	string d_animals[4];
+
 public:
 	/*Constructeur 2 paramametre*/
 	SplitTwo(string, string);

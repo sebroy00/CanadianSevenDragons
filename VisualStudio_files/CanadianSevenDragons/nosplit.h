@@ -4,6 +4,11 @@
 using namespace std;
 
 class NoSplit : public AnimalCard {
+
+	Orientation d_orientation = Orientation::UP;
+	EvenOdd d_evenOdd = EvenOdd::EVEN;
+	string d_animals[4];
+
 public:
 	/*Constructeur 1 paramametre*/
 	NoSplit(string animal) {
@@ -29,13 +34,13 @@ public:
 class Joker :public NoSplit {
 
 public:
-	Joker() :  NoSplit("a") {};
+	Joker() :  NoSplit("o") {};
 };
 
 class StartCard :public NoSplit {
 
 public:
-	StartCard() : NoSplit("b") {};
+	StartCard() : NoSplit("c") {};
 };
 
 #endif // !NOSPLIT_H
