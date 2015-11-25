@@ -62,6 +62,8 @@ void TEST_classeHand() {
 int main() {
 	//TEST_classeTable();
 	TEST_classeHand();
+	char a;
+	cin >> a;
 	return 0;
 }
 
