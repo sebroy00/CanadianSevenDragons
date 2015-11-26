@@ -1,21 +1,28 @@
 #include "table.h"
 
-int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCard> card, int row, int col){
+int match(shared_ptr<AnimalCard> around, shared_ptr<AnimalCard> card, int around_coord, int card_coord) {
+	return around->getAnimalAt(around_coord) == card->getAnimalAt(card_coord) /*match of two animals in both cards*/
+			|| around->getAnimalAt(around_coord) == 'c' /*card around is startCard with c*/
+			|| card->getAnimalAt(card_coord) == 'j' /*card placed is a joker*/
+			? 1 : 0; 
+}
+
+int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCard> card){
 	int paired[4] = { 0,0,0,0 };
 
 	/*Left*/
 	if (around[0] != 0) {
-		paired[0] |= around[0]->getAnimalAt(1) == card->getAnimalAt(0);
-		paired[2] |= around[0]->getAnimalAt(3) == card->getAnimalAt(2) ? 1 : 0;
+		paired[0] |= match(around[0], card, 1, 0); 
+		paired[2] |= match(around[0], card, 3, 2); 
 	}
 		if (card->getAnimalAt(0) == card->getAnimalAt(2)) {
 			paired[0] |= paired[2];
-			paired[2] = 0; //on garde le compte pour seulement une carte
+			paired[2] = 0; //on garde le compte pour seulement une carte s'il y a une paire
 		}
 	/*Top*/
 	if (around[1] != 0) {
-		paired[0] |= around[1]->getAnimalAt(2) == card->getAnimalAt(0) ? 1 : 0;
-		paired[1] |= around[1]->getAnimalAt(3) == card->getAnimalAt(1) ? 1 : 0;
+		paired[0] |= match(around[1], card, 2, 0); 
+		paired[1] |= match(around[1], card, 3, 1); 
 	}
 		if (card->getAnimalAt(0) == card->getAnimalAt(1)) {
 			paired[1] |= paired[0];
@@ -23,8 +30,8 @@ int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCar
 		}
 	/*Right*/
 	if (around[2] != 0) {
-		paired[1] |= around[2]->getAnimalAt(0) == card->getAnimalAt(1) ? 1 : 0;
-		paired[3] |= around[2]->getAnimalAt(2) == card->getAnimalAt(3) ? 1 : 0;
+		paired[1] |= match(around[2], card, 0, 1); 
+		paired[3] |= match(around[2], card, 2, 3); 
 	}
 		if (card->getAnimalAt(1) == card->getAnimalAt(3)) {
 			paired[3] |= paired[1];
@@ -32,8 +39,8 @@ int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCar
 		}
 	/*Bottom*/
 	if (around[3] != 0) {
-		paired[3] |= around[3]->getAnimalAt(1) == card->getAnimalAt(3) ? 1 : 0;
-		paired[2] |= around[3]->getAnimalAt(0) == card->getAnimalAt(2) ? 1 : 0;
+		paired[3] |= match(around[3], card, 1, 3); 
+		paired[2] |= match(around[3], card, 0, 2); 
 	}
 		if (card->getAnimalAt(3) == card->getAnimalAt(2)) {
 			paired[2] |= paired[3];
@@ -43,22 +50,25 @@ int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCar
 	return paired[0] + paired[1] + paired[2] + paired[3];
 }
 
-int verif() {
-
-	return 0;
-}
-
 int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 	/*Utiliser exception illegal placement*/
+	if (row < 0 || col < 0 || row > NUM_L || col > NUM_C) {
+		/*?Throw exception?*/
+		return 0;
+	}
+	if (table[row][col] != 0) {
+		/*?Throw exception?*/
+		return 0;
+	}
 
 	/*LEFT, TOP, RIGHT, BOTTOM*/
 	shared_ptr<AnimalCard> around[4];
-	around[0] = table[row][col - 1]; //left
-	around[1] = table[row - 1][col]; //top
-	around[2] = table[row][col + 1]; //right
-	around[3] = table[row + 1][col]; //bottom
+	around[0] = col - 1 < 0 || row < 0 ? 0 : table[row][col - 1]; //left
+	around[1] = row - 1 < 0 || col < 0 ? 0 : table[row - 1][col]; //top
+	around[2] = col     < 0 || row < 0 ? 0 : table[row][col + 1]; //right
+	around[3] = row     < 0 || col < 0 ? 0 : table[row + 1][col]; //bottom
 
-	int numConnections = isConnected(around, card, row, col);
+	int numConnections = isConnected(around, card);
 
 	if (numConnections == 0) {
 		/*?Throw exception?*/

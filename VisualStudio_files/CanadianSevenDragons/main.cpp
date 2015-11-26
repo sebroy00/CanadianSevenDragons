@@ -96,6 +96,16 @@ int main() {
 	
 	//array of players ? PROBLEM : different secretCards
 	
+
+	//ofstream ofs("testOFS.txt", ios::binary);
+	//ofs.write((char *)&h, sizeof(h));
+	//ofs.close();
+
+	//ifstream ifs("testOFS.txt", ios::binary);
+	//ifs.read((char *)&h_read, sizeof(h_read));
+	//ifs.read((char *)&h_read2, sizeof(h_read));
+
+
 	
 	return 0;
 }

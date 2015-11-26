@@ -27,8 +27,6 @@ public:
 	  bb hm	hb BB */
 	void printCard();
 
-
-
 };
 
 #endif // !HAND_H
