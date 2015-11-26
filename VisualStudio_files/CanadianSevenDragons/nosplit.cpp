@@ -24,7 +24,7 @@ void NoSplit::printRow(){
 	setRow(d_evenOdd);
 }
 
-bool NoSplit::findAnimal(string _animal)
+bool NoSplit::findAnimal(char _animal)
 {
 	for (int c = 0; c < 4; c++)
 		if (d_animals[c] == _animal)
@@ -32,6 +32,6 @@ bool NoSplit::findAnimal(string _animal)
 	return false;
 }
 
-string NoSplit::getAnimalAt(int a) {
+char NoSplit::getAnimalAt(int a) {
 	return d_animals[0]; //tous les animaux sont les memes, donc on peut retourne le premier element
 }

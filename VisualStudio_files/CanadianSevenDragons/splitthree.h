@@ -10,7 +10,7 @@ class SplitThree : public AnimalCard {
 
 public:
 	/*Constructeur 3 paramametre*/
-	SplitThree(string, string, string);
+	SplitThree(char, char, char);
 
 	/*orientation change*/
 	virtual void setOrientation(Orientation);
@@ -21,10 +21,10 @@ public:
 	/*affiche les deux caractères correspondant de la carte.*/
 	virtual void printRow();
 
-	virtual bool findAnimal(string);
+	virtual bool findAnimal(char);
 
 	/*Va chercher l'animal a cette position*/
-	virtual string getAnimalAt(int);
+	virtual char getAnimalAt(int);
 };
 
 #endif // !SPLITTHREE_H

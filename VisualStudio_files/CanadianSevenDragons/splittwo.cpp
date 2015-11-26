@@ -1,6 +1,6 @@
 #include "splittwo.h"
 
-SplitTwo::SplitTwo(string animal1, string animal2) {
+SplitTwo::SplitTwo(char animal1, char animal2) {
 	srand(time(0));
 	int random0to1 = rand() % 2;
 
@@ -42,7 +42,7 @@ void SplitTwo::printRow() {
 	setRow(d_evenOdd);
 }
 
-bool SplitTwo::findAnimal(string _animal)
+bool SplitTwo::findAnimal(char _animal)
 {
 	for (int c = 0; c < 4; c++)
 		if (d_animals[c] == _animal)
@@ -50,7 +50,7 @@ bool SplitTwo::findAnimal(string _animal)
 	return false;
 }
 
-string SplitTwo::getAnimalAt(int a) {
+char SplitTwo::getAnimalAt(int a) {
 	if (d_orientation == UP)
 		return d_animals[a];
 	else if (d_orientation == DOWN) {

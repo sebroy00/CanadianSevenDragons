@@ -5,18 +5,19 @@
 #include"splitfour.h"
 #include"table.h"
 #include"hand.h"
+#include"player.h"
 
 
 void TEST_classeTable() {
 	Table table = Table();
-	shared_ptr<NoSplit> sptr(new NoSplit("a"));
-	shared_ptr<SplitTwo> sptrTWO(new SplitTwo("c", "o"));
-	shared_ptr<SplitTwo> sptrTHREE(new SplitTwo("o", "c"));
+	shared_ptr<NoSplit> sptr(new NoSplit('a'));
+	shared_ptr<SplitTwo> sptrTWO(new SplitTwo('c', 'o'));
+	shared_ptr<SplitTwo> sptrTHREE(new SplitTwo('o', 'c'));
 
-	shared_ptr<SplitFour> sptr4a(new SplitFour("b", "a", "d", "c"));
-	shared_ptr<SplitFour> sptr4b(new SplitFour("a", "b", "c", "d"));
-	shared_ptr<SplitFour> sptr4c(new SplitFour("b", "c", "d", "a"));
-	shared_ptr<SplitFour> sptr4d(new SplitFour("c", "d", "a", "b"));
+	shared_ptr<SplitFour> sptr4a(new SplitFour('b', 'a', 'd', 'c'));
+	shared_ptr<SplitFour> sptr4b(new SplitFour('a', 'b', 'c', 'd'));
+	shared_ptr<SplitFour> sptr4c(new SplitFour('b', 'c', 'd', 'a'));
+	shared_ptr<SplitFour> sptr4d(new SplitFour('c', 'd', 'a', 'b'));
 
 	table.addAt(sptr, 5, 50);
 	cout << table.addAt(sptr4a, 52, 53) << endl;
@@ -40,7 +41,7 @@ void TEST_classeTable() {
 	cout << endl;
 
 
-	string animal("a");
+	char animal('a');
 	if (table.win(animal))
 		cout << "win";
 }
@@ -62,8 +63,8 @@ void printHand(Hand h) {
 
 void TEST_classeHand() {
 	Hand h = Hand();
-	shared_ptr<NoSplit> sptr(new NoSplit("Q"));
-	shared_ptr<NoSplit> sptr2(new NoSplit("P"));
+	shared_ptr<NoSplit> sptr(new NoSplit('Q'));
+	shared_ptr<NoSplit> sptr2(new NoSplit('P'));
 	h += sptr;
 	h += sptr2;
 	h += sptr;
@@ -87,7 +88,15 @@ void TEST_classeHand() {
 	printHand(h);
 }
 int main() {
-
+	int numPlayers;
+	cout << "Number of players";
+	cin >> numPlayers;
+	if (numPlayers < 2 || numPlayers > 5)
+		numPlayers = 2;
+	
+	//array of players ? PROBLEM : different secretCards
+	
+	
 	return 0;
 }
 

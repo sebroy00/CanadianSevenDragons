@@ -7,7 +7,7 @@ class SplitFour : public AnimalCard {
 
 public:
 	/*Constructeur 4 paramametre*/
-	SplitFour(string, string, string, string);
+	SplitFour(char, char, char, char);
 
 	/*orientation change*/
 	virtual void setOrientation(Orientation);
@@ -18,10 +18,10 @@ public:
 	/*affiche les deux caractères correspondant de la carte.*/
 	virtual void printRow();
 
-	virtual bool findAnimal(string);
+	virtual bool findAnimal(char);
 
 	/*Va chercher l'animal a cette position*/
-	virtual string getAnimalAt(int);
+	virtual char getAnimalAt(int);
 };
 
 #endif // !SPLITFOUR_H

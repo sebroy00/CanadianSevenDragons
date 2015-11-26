@@ -1,6 +1,6 @@
 #include "splitfour.h"
 
-SplitFour::SplitFour(string animal1, string animal2, string animal3, string animal4) {
+SplitFour::SplitFour(char animal1, char animal2, char animal3, char animal4) {
 	d_animals[0] = animal1;
 	d_animals[1] = animal2;
 	d_animals[2] = animal3;
@@ -30,7 +30,7 @@ void SplitFour::printRow() {
 	setRow(d_evenOdd);
 }
 
-bool SplitFour::findAnimal(string _animal)
+bool SplitFour::findAnimal(char _animal)
 {
 	for (int c = 0; c < 4; c++)
 		if (d_animals[c] == _animal)
@@ -38,7 +38,7 @@ bool SplitFour::findAnimal(string _animal)
 	return false;
 }
 
-string SplitFour::getAnimalAt(int a) {
+char SplitFour::getAnimalAt(int a) {
 	if (d_orientation == UP)
 		return d_animals[a];
 	else if (d_orientation == DOWN) {

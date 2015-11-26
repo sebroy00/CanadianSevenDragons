@@ -78,7 +78,7 @@ std::shared_ptr<AnimalCard> Table::get(int row, int col) {
 	return table[row][col];
 }
 
-bool Table::win(std::string & animal) {
+bool Table::win(char & animal) {
 	int count(0);
 	for (int l = 0; l < NUM_L; l++)
 		for (int c = 0; c < NUM_C; c++) {

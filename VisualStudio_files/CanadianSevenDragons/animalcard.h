@@ -14,7 +14,7 @@ class AnimalCard {
 protected:
 	Orientation d_orientation = Orientation::UP;
 	EvenOdd d_evenOdd = EvenOdd::EVEN;
-	string d_animals[4];
+	char d_animals[4];
 public: //a determiner
 	/*change l’orientation de la carte*/
 	virtual void setOrientation(Orientation) = 0;
@@ -25,9 +25,9 @@ public: //a determiner
 	/*affiche les deux caractères correspondant de la carte.*/
 	virtual void printRow() = 0;
 
-	virtual bool findAnimal(string) = 0;
+	virtual bool findAnimal(char) = 0;
 
-	virtual string getAnimalAt(int) = 0;
+	virtual char getAnimalAt(int) = 0;
 };
 
 #endif // !ANIMALCARD_H

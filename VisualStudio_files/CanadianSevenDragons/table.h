@@ -28,7 +28,7 @@ public:
 	std::shared_ptr<AnimalCard> get(int row, int col);
 
 	/*retourne true si cet animal est present sur 12 cartes se trouvant sur la table*/
-	bool win(std::string & animal);
+	bool win(char & animal);
 
 	void printTable();
 };
