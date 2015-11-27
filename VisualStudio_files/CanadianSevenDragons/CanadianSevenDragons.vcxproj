@@ -33,6 +33,7 @@
     <ClInclude Include="table.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="actioncard.cpp" />
     <ClCompile Include="AnimalCardFactory.cpp" />
     <ClCompile Include="hand.cpp" />
     <ClCompile Include="main.cpp" />

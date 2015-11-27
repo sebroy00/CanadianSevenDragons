@@ -6,7 +6,7 @@
 #include <ctime>
 using namespace std;
 
-class SplitThree : AnimalCard {
+class SplitThree : public AnimalCard {
 
 	Orientation d_orientation = Orientation::UP;
 	EvenOdd d_evenOdd = EvenOdd::EVEN;

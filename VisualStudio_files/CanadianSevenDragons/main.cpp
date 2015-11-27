@@ -59,9 +59,26 @@ void TEST_classeHand() {
 	printHand(h);
 }
 
+void loadFromFile(){
+
+};
+
 int main() {
 	//TEST_classeTable();
 	TEST_classeHand();
+	
+	//Get the names of 2-5 players
+	int nombreDeJoueurs =0;
+	string names[5];
+	string tempName = "";
+	while (nombreDeJoueurs<5){
+		
+		cin >> tempName;
+		cout << tempName << endl;
+		
+		nombreDeJoueurs++;
+	}
+
 	char a;
 	cin >> a;
 	return 0;

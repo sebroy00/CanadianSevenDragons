@@ -1,4 +1,5 @@
 #include <iostream>
+#include <array>
 #include "AnimalCardFactory.h"
 
 AnimalCardFactory::AnimalCardFactory(){
@@ -12,7 +13,8 @@ AnimalCardFactory::AnimalCardFactory(){
 	}
 	
 	//Faire un iteration des elements
-	actionCards = new ActionCard[5];
+	
+	std::array<ActionCard, 5> actionCards;
 	actionCards[0] = BearAction();
 	actionCards[1] = DeerAction();
 	actionCards[2] = MooseAction();
@@ -21,8 +23,8 @@ AnimalCardFactory::AnimalCardFactory(){
 
 	// faire le shuffle avec la fonction shuffle 
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::shuffle(*actionCards, *(actionCards + 5), std::default_random_engine(seed));
-		
+	std::shuffle<ActionCard,std::default_random_engine>(actionCards.begin(), actionCards.end(), std::default_random_engine(seed));
+	
 	//pour les 20 cartes, il faut trouver une representation egale de tout les animaux
 	//il y a 3 animaux par carte, donc un total de 60 animaux doivent etre genere
 	string *a = new string[60];
@@ -70,9 +72,10 @@ AnimalCardFactory::AnimalCardFactory(){
 
 	for (int i = 0; i < 10; i++)
 	{
-		splitTwoCards[i] = SplitTwo(a[i * 2 + 0], a[i * 2 + 1]);
+		animalCards[i] = SplitTwo(a[i * 2 + 0], a[i * 2 + 1]);
 	}
 
 	//en faire
 
 }
+

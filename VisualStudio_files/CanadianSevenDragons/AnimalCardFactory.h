@@ -22,12 +22,12 @@ class AnimalCardFactory{
 	AnimalCard *animalCards;
 
 public:
-
-	static AnimalCardFactory* getFactory();
-
+	
 	//Constructeur
 	AnimalCardFactory();
 
+	static AnimalCardFactory* getFactory();
+	
 	/*Representation de AnimalCard avec sharec pointers. Le Deck devrait etre un template class*/
 	Deck <std::shared_ptr<AnimalCard>> getDeck();
 
