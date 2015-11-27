@@ -10,11 +10,11 @@ using namespace std;
 
 template <class T>
 class Deck : public std::vector<T>{
-	vector<T> ac;
+	std::vector<T> ac;
+
 public:
-	Deck(AnimalCardFactory(ac));
 	std::shared_ptr<T> draw();
-};	
+};
 #endif //!DECK_H
 
 template <class T>

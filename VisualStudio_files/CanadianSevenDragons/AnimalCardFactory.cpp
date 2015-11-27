@@ -3,14 +3,6 @@
 #include "AnimalCardFactory.h"
 
 AnimalCardFactory::AnimalCardFactory(){
-		
-	//faire 5 cartes random
-	int premierPic = rand() % 5;
-	int deuxiemePic = rand() % 5;
-	
-	while (deuxiemePic != premierPic){
-		deuxiemePic = rand() % 5;
-	}
 	
 	//Faire un iteration des elements
 	vector<ActionCard> actionCards;
@@ -20,6 +12,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	actionCards[3] = WolfAction();
 	actionCards[4] = HareAction();
 
+	
 	// faire le shuffle avec la fonction shuffle 
 	random_shuffle(actionCards.begin(), actionCards.end());
 	
