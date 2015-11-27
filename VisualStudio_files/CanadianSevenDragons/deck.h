@@ -9,7 +9,15 @@
 using namespace std;
 
 template <class T>
-class Deck : public std::vector<AnimalCard>{
-	vector<AnimalCard> ac;
-};
+class Deck : public std::vector<T>{
+	vector<T> ac;
+public:
+	Deck(AnimalCardFactory(ac));
+	std::shared_ptr<T> draw();
+};	
 #endif //!DECK_H
+
+template <class T>
+std::shared_ptr<T> Deck::draw(){
+	return ac.pop_back();
+}
