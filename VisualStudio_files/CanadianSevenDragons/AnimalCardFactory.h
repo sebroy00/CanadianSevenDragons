@@ -18,8 +18,8 @@ enum Animal{loup, ours, orignal, lievre, cerf};
 class AnimalCardFactory{
 
 	//5 ActionCard, 10 SplitTwo, 20 SplitThree and 15 SplitFour
-	ActionCard *actionCards;
-	AnimalCard *animalCards;
+	vector<ActionCard> actionCards;
+	vector<AnimalCard> animalCards;
 
 public:
 	
