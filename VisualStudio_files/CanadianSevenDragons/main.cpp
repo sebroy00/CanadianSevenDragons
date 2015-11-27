@@ -1,4 +1,6 @@
 #include <fstream>
+#include <vector>
+#include <algorithm>    // std::random_shuffle
 #include"animalcard.h"
 #include"nosplit.h"
 #include"splittwo.h"
@@ -6,6 +8,7 @@
 #include"table.h"
 #include"hand.h"
 #include"player.h"
+#include"deck.h"
 
 
 void TEST_classeTable() {
@@ -87,23 +90,63 @@ void TEST_classeHand() {
 	h += sptr2;
 	printHand(h);
 }
+
+vector<char> secretAnimals = { 'b','d','h','m','w' };
 int main() {
-	int numPlayers;
-	cout << "Number of players";
-	cin >> numPlayers;
-	if (numPlayers < 2 || numPlayers > 5)
-		numPlayers = 2;
-	
+	int in_numPlayers;
+	cout << "-------Preparation-------" << endl;
+	cout << "Nombre de joueurs: ";
+	cin >> in_numPlayers;
+	cout << endl;
+	/*on doit avoir un nombre entre 2 et 5*/
+	in_numPlayers = in_numPlayers > 5 ? 5 : in_numPlayers;
+	in_numPlayers = in_numPlayers < 2 ? 2 : in_numPlayers;
+
+	/*shuffle the secret animals*/
+	random_shuffle(secretAnimals.begin(), secretAnimals.end()); 
+
+	/*create all players, in a vector*/
+	vector<Player> players(in_numPlayers, Player('0'));
+
+	/*create Deck of cards*/
+	Deck<AnimalCard> deck = Deck<AnimalCard>();
+
+	string name;
+	while (in_numPlayers >= 0) {
+		players[--in_numPlayers] = Player(secretAnimals[in_numPlayers]);
+		cout << "Nom du joueur " << in_numPlayers << ": ";
+		cin >> name;
+		players[in_numPlayers].setName(name);
+		players[in_numPlayers].hand += deck.draw;
+	}
+
+	system("cls");
+
+	bool winner = false;
+	Table table = Table();
+
+	while (!winner) {
+		for each (Player p in players) {
+			cout << "Tour a " << p.getName() << "." << endl;
+			cout << "------------------------" << endl << endl;
+
+			cout << "Table: " << endl;
+			table.printTable();
+			cout << endl;
+
+			cout << "Cartes: " << endl;
+			printHand(p.hand);
+
+			do {
+
+			} while (true);
+		}
+
+	}
 	//array of players ? PROBLEM : different secretCards
 	
 
-	//ofstream ofs("testOFS.txt", ios::binary);
-	//ofs.write((char *)&h, sizeof(h));
-	//ofs.close();
-
-	//ifstream ifs("testOFS.txt", ios::binary);
-	//ifs.read((char *)&h_read, sizeof(h_read));
-	//ifs.read((char *)&h_read2, sizeof(h_read));
+	
 
 
 	

@@ -65,8 +65,8 @@ int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 	shared_ptr<AnimalCard> around[4];
 	around[0] = col - 1 < 0 || row < 0 ? 0 : table[row][col - 1]; //left
 	around[1] = row - 1 < 0 || col < 0 ? 0 : table[row - 1][col]; //top
-	around[2] = col     < 0 || row < 0 ? 0 : table[row][col + 1]; //right
-	around[3] = row     < 0 || col < 0 ? 0 : table[row + 1][col]; //bottom
+	around[2] = col + 1 > NUM_C ? 0 : table[row][col + 1]; //right
+	around[3] = row + 1 > NUM_L ? 0 : table[row + 1][col]; //bottom
 
 	int numConnections = isConnected(around, card);
 

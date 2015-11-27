@@ -1,5 +1,10 @@
 #include "player.h"
 
+Player::Player(char _secretAnimal) {
+	d_secretAnimal = _secretAnimal;
+	hand = Hand();
+}
+
 char Player::swapSecretAnimal(char & _secretAnimal) {
 	char rtrn_secretAnimal = d_secretAnimal;
 	d_secretAnimal = _secretAnimal;
@@ -12,6 +17,14 @@ char Player::getSecretAnimal() {
 
 void Player::printState() {
 	/*On imprime quoi???*/
+}
+
+string Player::getName() {
+	return d_name;
+}
+
+void Player::setName(string _name) {
+	d_name = _name;
 }
 
 
