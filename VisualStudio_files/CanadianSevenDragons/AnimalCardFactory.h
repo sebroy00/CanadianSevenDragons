@@ -18,8 +18,7 @@ enum Animal{loup, ours, orignal, lievre, cerf};
 class AnimalCardFactory{
 
 	//5 ActionCard, 10 SplitTwo, 20 SplitThree and 15 SplitFour
-	vector<ActionCard> actionCards;
-	vector<AnimalCard> animalCards;
+	
 	Deck<std::shared_ptr<AnimalCard>> deck;
 
 public:

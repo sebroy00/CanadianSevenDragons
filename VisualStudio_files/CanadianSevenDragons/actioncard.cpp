@@ -5,10 +5,6 @@ using namespace std;
 
 //Faire l'implementation de toutes les actions
 
-BearAction::BearAction(){
-
-}
-
 QueryResult BearAction::query(){
 
 	cout << "Vous avez la carte Ours, voulez vous echanger votre main avec celle d'un autre joueur (y/n)" << endl;

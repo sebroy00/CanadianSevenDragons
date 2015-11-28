@@ -8,8 +8,7 @@
 
 class Hand {
 	
-	std::list<shared_ptr<AnimalCard> > a = list<shared_ptr<AnimalCard> >();
-
+	std::list<shared_ptr<AnimalCard>> a = list<shared_ptr<AnimalCard>>();
 
 public:
 	/*Ajoute une carte dans la main du joueur*/
