@@ -10,6 +10,7 @@ class NoSplit : public AnimalCard {
 	string d_animals[4];
 
 public:
+	NoSplit(){};
 	/*Constructeur 1 paramametre*/
 	NoSplit(string animal) {
 		for (int i = 0; i < 4; i++)

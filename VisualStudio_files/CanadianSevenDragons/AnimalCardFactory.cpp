@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "AnimalCardFactory.h"
 
 AnimalCardFactory::AnimalCardFactory(){
@@ -53,12 +52,20 @@ AnimalCardFactory::AnimalCardFactory(){
 		deck.push_back(static_cast<shared_ptr<AnimalCard>>(new SplitTwo(a[i * 2 + 0], a[i * 2 + 1])));
 	}
 
-	deck.push_back(static_cast<shared_ptr<ActionCard>>(new BearAction()));
+	
+	deck.push_back(shared_ptr<AnimalCard>(new BearAction()));
 	deck.push_back(static_cast<shared_ptr<ActionCard>>(new DeerAction()));
 	deck.push_back(static_cast<shared_ptr<ActionCard>>(new MooseAction()));
 	deck.push_back(static_cast<shared_ptr<ActionCard>>(new WolfAction()));
 	deck.push_back(static_cast<shared_ptr<ActionCard>>(new HareAction()));
-
+	deck.push_back(static_cast<shared_ptr<Joker>>(new Joker()));
+	
 	random_shuffle(deck.begin(), deck.end());
+}
+
+
+//fonction simplement pour aller chercher le Deck
+Deck<shared_ptr<AnimalCard>> AnimalCardFactory::getDeck(){
+	return deck;
 }
 

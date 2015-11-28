@@ -1,7 +1,6 @@
 #include <iostream>
 #include "animalcard.h"
 #include "deck.h"
-#include "nosplit.h"
 #include "splitfour.h"
 #include "splitthree.h"
 #include "splittwo.h"
@@ -10,7 +9,6 @@
 #include <list>
 #include <algorithm>
 #include <random>
-#include <chrono>
 #include <vector>
 
 enum Animal{loup, ours, orignal, lievre, cerf};
