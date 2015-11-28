@@ -7,14 +7,14 @@ AnimalCardFactory::AnimalCardFactory(){
 	
 	//pour les 20 cartes, il faut trouver une representation egale de tout les animaux
 	//il y a 3 animaux par carte, donc un total de 60 animaux doivent etre genere
-	vector<string> a;
+	vector<char> a;
 	for (int i = 0; i < 12; i++)
 	{
-		a[i*5+0] = "b";
-		a[i*5+1] = "w";
-		a[i*5+2] = "m";
-		a[i*5+3] = "h";
-		a[i*5+4] = "d";
+		a[i*5+0] = 'b';
+		a[i*5+1] = 'w';
+		a[i*5+2] = 'm';
+		a[i*5+3] = 'h';
+		a[i*5+4] = 'd';
 	}
 
 	//faire un shuffle des 60 animaux
@@ -39,11 +39,11 @@ AnimalCardFactory::AnimalCardFactory(){
 	vector<string> smallerAnimalSet;
 	for (int i = 0; i < 4; i++)
 	{
-		smallerAnimalSet[i * 5 + 0] = "b";
-		smallerAnimalSet[i * 5 + 1] = "w";
-		smallerAnimalSet[i * 5 + 2] = "m";
-		smallerAnimalSet[i * 5 + 3] = "h";
-		smallerAnimalSet[i * 5 + 4] = "d";
+		smallerAnimalSet[i * 5 + 0] = 'b';
+		smallerAnimalSet[i * 5 + 1] = 'w';
+		smallerAnimalSet[i * 5 + 2] = 'm';
+		smallerAnimalSet[i * 5 + 3] = 'h';
+		smallerAnimalSet[i * 5 + 4] = 'd';
 	}
 	
 	random_shuffle(smallerAnimalSet.begin(), smallerAnimalSet.end());
