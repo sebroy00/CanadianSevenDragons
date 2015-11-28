@@ -6,6 +6,7 @@ using namespace std;
 class NoSplit : public AnimalCard {
 
 public:
+	NoSplit(){};
 	/*Constructeur 1 paramametre*/
 	NoSplit(char animal) {
 		for (int i = 0; i < 4; i++)

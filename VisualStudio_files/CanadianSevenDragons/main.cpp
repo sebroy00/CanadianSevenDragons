@@ -91,6 +91,7 @@ void TEST_classeHand() {
 	printHand(h);
 }
 
+
 vector<char> secretAnimals = { 'b','d','h','m','w' };
 int main() {
 	int in_numPlayers;
@@ -149,7 +150,6 @@ int main() {
 	
 
 
-	
 	return 0;
 }
 

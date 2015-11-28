@@ -5,6 +5,7 @@ using namespace std;
 
 class SplitFour : public AnimalCard {
 
+
 public:
 	/*Constructeur 4 paramametre*/
 	SplitFour(char, char, char, char);

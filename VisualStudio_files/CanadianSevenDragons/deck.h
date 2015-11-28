@@ -5,15 +5,18 @@
 
 #include <iostream>
 #include <vector>
-
+#include <memory>
 
 using namespace std;
 
 template <class T>
-class Deck : public std::vector<AnimalCard>{
-	vector<AnimalCard> ac;
-public:
-	std::shared_ptr<T> draw();
 
+class Deck : public vector<T>{
+
+
+public:
+	shared_ptr<T> draw(){
+		return this.pop_back();
+	}
 };
 #endif //!DECK_H

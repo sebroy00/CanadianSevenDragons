@@ -8,6 +8,7 @@ using namespace std;
 
 class SplitThree : public AnimalCard {
 
+
 public:
 	/*Constructeur 3 paramametre*/
 	SplitThree(char, char, char);
