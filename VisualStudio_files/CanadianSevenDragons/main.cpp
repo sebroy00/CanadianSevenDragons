@@ -1,5 +1,6 @@
 #include <fstream>
 #include <vector>
+#include <memory>
 #include <algorithm>    // std::random_shuffle
 #include"animalcard.h"
 #include"nosplit.h"
@@ -109,8 +110,9 @@ int main() {
 	/*create all players, in a vector*/
 	vector<Player> players(in_numPlayers, Player('0'));
 
+
 	/*create Deck of cards*/
-	Deck<AnimalCard> deck = Deck<AnimalCard>();
+	Deck<shared_ptr<AnimalCard>> deck();
 
 	string name;
 	while (in_numPlayers >= 0) {
@@ -118,7 +120,7 @@ int main() {
 		cout << "Nom du joueur " << in_numPlayers << ": ";
 		cin >> name;
 		players[in_numPlayers].setName(name);
-		players[in_numPlayers].hand += deck.draw;
+		players[in_numPlayers].hand += deck.draw();
 	}
 
 	system("cls");
