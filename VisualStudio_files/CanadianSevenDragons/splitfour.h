@@ -1,6 +1,8 @@
+#include"animalcard.h"
+
 #ifndef SPLITFOUR_H
 #define SPLITFOUR_H
-#include"animalcard.h"
+
 using namespace std;
 
 class SplitFour : public AnimalCard {

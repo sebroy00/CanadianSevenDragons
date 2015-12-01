@@ -116,7 +116,7 @@ int main() {
 
 
 	/*create Deck of cards*/
-	Deck<shared_ptr<AnimalCard>> deck = ac->getDeck();
+	
 
 	string name;
 	while (in_numPlayers >= 0) {
@@ -124,7 +124,7 @@ int main() {
 		cout << "Nom du joueur " << in_numPlayers << ": ";
 		cin >> name;
 		players[in_numPlayers].setName(name);
-		players[in_numPlayers].hand += *deck.draw();
+		//players[in_numPlayers].hand += ac->getDeck()draw();
 	}
 
 	system("cls");

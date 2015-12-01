@@ -11,12 +11,14 @@
 #include <random>
 #include <vector>
 
+#ifndef ANIMALCARDFACTORY_D
+#define ANIMALCARDFACTORY_D
+
 enum Animal{loup, ours, orignal, lievre, cerf};
 
 class AnimalCardFactory{
 
 	//5 ActionCard, 10 SplitTwo, 20 SplitThree and 15 SplitFour
-	
 	Deck<shared_ptr<AnimalCard>> deck;
 
 public:
@@ -30,3 +32,5 @@ public:
 	Deck <std::shared_ptr<AnimalCard>> getDeck();
 
 };
+
+#endif

@@ -1,7 +1,9 @@
-#ifndef PLAYER_H
-#define PLAYER_H
 #include<iostream>
 #include"hand.h"
+
+#ifndef PLAYER_H
+#define PLAYER_H
+
 using namespace std;
 class Player {
 	char d_secretAnimal;

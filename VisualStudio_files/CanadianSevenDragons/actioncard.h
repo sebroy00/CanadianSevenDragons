@@ -1,10 +1,10 @@
-
-#ifndef ACTIONCARD_H
-#define ACTIONCARD_H
-
+#include <iostream>
 #include"nosplit.h"
 #include "table.h"
 #include "player.h"
+
+#ifndef ACTIONCARD_H
+#define ACTIONCARD_H
 
 using namespace std;
 

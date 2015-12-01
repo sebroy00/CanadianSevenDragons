@@ -1,8 +1,8 @@
-#ifndef ANIMALCARD_H
-#define ANIMALCARD_H
 #include<iostream>
 #include<string>
 
+#ifndef ANIMALCARD_H
+#define ANIMALCARD_H
 
 using namespace std;
 

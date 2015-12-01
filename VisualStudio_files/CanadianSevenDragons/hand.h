@@ -1,10 +1,11 @@
-#ifndef HAND_H
-#define HAND_H
-
 #include <iostream>
 #include <memory>
 #include <list>
 #include "animalcard.h"
+
+
+#ifndef HAND_H
+#define HAND_H
 
 class Hand {
 	

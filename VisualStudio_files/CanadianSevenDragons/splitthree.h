@@ -1,9 +1,11 @@
-#ifndef SPLITTHREE_H
-#define SPLITTHREE_H
 #include"animalcard.h"
 #include <stdio.h>     
 #include <cstdlib>
 #include <ctime>
+
+#ifndef SPLITTHREE_H
+#define SPLITTHREE_H
+
 using namespace std;
 
 class SplitThree : public AnimalCard {

@@ -1,6 +1,8 @@
+#include"animalcard.h"
+
 #ifndef NOSPLIT_H
 #define NOSPLIT_H
-#include"animalcard.h"
+
 using namespace std;
 
 class NoSplit : public AnimalCard {
