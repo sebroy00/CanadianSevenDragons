@@ -21,7 +21,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	//faire un array de 60 animaux
 	for (int i = 0; i < 20; i++)
 	{
-		deck[deck.size()] = shared_ptr<AnimalCard>(new SplitThree(a[i * 3 + 0], a[i * 3 + 1], a[i * 3 + 2]));
+		deck.push_back(shared_ptr<AnimalCard>(new SplitThree(a[i * 3 + 0], a[i * 3 + 1], a[i * 3 + 2])));
 	}
 	
 	//faire un autre shuffle des 60 animaux
@@ -30,7 +30,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	//15 cartes
 	for (int i = 0; i < 15; i++)
 	{
-		deck[deck.size()] =  shared_ptr<AnimalCard>(new SplitFour(a[i * 4 + 0], a[i * 4 + 1], a[i * 4 + 2], a[i * 4 + 3]));
+		deck.push_back(shared_ptr<AnimalCard>(new SplitFour(a[i * 4 + 0], a[i * 4 + 1], a[i * 4 + 2], a[i * 4 + 3])));
 	}
 	
 	//recree avec 20 animaux et faire un shuffle
@@ -48,15 +48,15 @@ AnimalCardFactory::AnimalCardFactory(){
 	
 	for (int i = 0; i < 10; i++)
 	{
-		deck[deck.size()] =  shared_ptr<AnimalCard >(new SplitTwo(a[i * 2 + 0], a[i * 2 + 1]));
+		deck.push_back(shared_ptr<AnimalCard>(new SplitTwo(a[i * 2 + 0], a[i * 2 + 1])));
 	}
 
-	deck[deck.size()] = shared_ptr<AnimalCard>(new BearAction());
-	deck[deck.size()] = shared_ptr<ActionCard>(new DeerAction());
-	deck[deck.size()] = shared_ptr<ActionCard>(new MooseAction());
-	deck[deck.size()] = shared_ptr<ActionCard>(new WolfAction());
-	deck[deck.size()] = shared_ptr<ActionCard>(new HareAction());
-	deck[deck.size()] = shared_ptr<Joker>(new Joker());
+	deck.push_back(shared_ptr<ActionCard>(new BearAction()));
+	deck.push_back(shared_ptr<ActionCard>(new DeerAction()));
+	deck.push_back(shared_ptr<ActionCard>(new MooseAction()));
+	deck.push_back(shared_ptr<ActionCard>(new WolfAction()));
+	deck.push_back(shared_ptr<ActionCard>(new HareAction()));
+	deck.push_back(shared_ptr<Joker>(new Joker()));
 	
 	random_shuffle(deck.begin(), deck.end());
 }

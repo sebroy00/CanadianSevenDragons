@@ -10,7 +10,7 @@
 #include"hand.h"
 #include"player.h"
 #include"deck.h"
-
+#include "AnimalCardFactory.h"
 
 void TEST_classeTable() {
 	Table table = Table();
@@ -110,9 +110,13 @@ int main() {
 	/*create all players, in a vector*/
 	vector<Player> players(in_numPlayers, Player('0'));
 
+	AnimalCardFactory *ac = new AnimalCardFactory();
+
+	//Aller cherche le Deck dans le animal card factory
+
 
 	/*create Deck of cards*/
-	Deck<shared_ptr<AnimalCard>> deck();
+	Deck<shared_ptr<AnimalCard>> deck = ac->getDeck();
 
 	string name;
 	while (in_numPlayers >= 0) {
@@ -120,7 +124,7 @@ int main() {
 		cout << "Nom du joueur " << in_numPlayers << ": ";
 		cin >> name;
 		players[in_numPlayers].setName(name);
-		players[in_numPlayers].hand += deck.draw();
+		players[in_numPlayers].hand += *deck.draw();
 	}
 
 	system("cls");
@@ -144,13 +148,8 @@ int main() {
 
 			} while (true);
 		}
-
 	}
 	//array of players ? PROBLEM : different secretCards
-	
-
-	
-
 
 	return 0;
 }

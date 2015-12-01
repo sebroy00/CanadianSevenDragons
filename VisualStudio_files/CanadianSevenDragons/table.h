@@ -2,13 +2,14 @@
 #include <memory>
 
 #ifndef ANIMALCARD
+#define ANIMALCARD
 #include "animalcard.h"
 #include "nosplit.h"
-#endif
+
 
 using namespace std;
 
-const int NUM_L = 103, NUM_C = 103, MID = 52, WIN = 12;
+extern const int NUM_L(103), NUM_C = 103, MID = 52, WIN = 12;
 class Table {
 
 	shared_ptr<AnimalCard> table[NUM_L][NUM_C];
@@ -32,3 +33,5 @@ public:
 
 	void printTable();
 };
+
+#endif

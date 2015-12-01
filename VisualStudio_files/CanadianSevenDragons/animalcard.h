@@ -2,6 +2,8 @@
 #define ANIMALCARD_H
 #include<iostream>
 #include<string>
+
+
 using namespace std;
 
 enum Orientation { UP, DOWN };

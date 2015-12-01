@@ -17,7 +17,7 @@ class AnimalCardFactory{
 
 	//5 ActionCard, 10 SplitTwo, 20 SplitThree and 15 SplitFour
 	
-	Deck<std::shared_ptr<AnimalCard>> deck;
+	Deck<shared_ptr<AnimalCard>> deck;
 
 public:
 	
