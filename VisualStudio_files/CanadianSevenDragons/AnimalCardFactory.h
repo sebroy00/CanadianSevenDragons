@@ -5,6 +5,7 @@
 #include "splitthree.h"
 #include "splittwo.h"
 #include "actioncard.h"
+#include "exeptions.h"
 #include <memory>
 #include <list>
 #include <algorithm>
@@ -29,7 +30,7 @@ public:
 	static AnimalCardFactory* getFactory();
 	
 	/*Representation de AnimalCard avec sharec pointers. Le Deck devrait etre un template class*/
-	Deck <std::shared_ptr<AnimalCard>> getDeck();
+	Deck <shared_ptr<AnimalCard>> getDeck();
 
 };
 

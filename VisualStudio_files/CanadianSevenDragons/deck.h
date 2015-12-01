@@ -4,6 +4,8 @@
 #include <vector>
 #include <memory>
 
+#include"exeptions.h"
+
 #ifndef DECK_H
 #define DECK_H
 
@@ -14,10 +16,13 @@ class Deck : public vector<T>{
 
 public:
 	//try to get the element on top
-	shared_ptr<T> draw(){
+	T draw(){
 		//faire un shared pointer vide
-		if (!this->back()) {
-			return this->back();
+		if (size()>0) {
+			return at(size()-1);
+		}
+		else{
+			throw MissingCard("Dans la methode draw et le deck est vide");
 		}
 	}
 };

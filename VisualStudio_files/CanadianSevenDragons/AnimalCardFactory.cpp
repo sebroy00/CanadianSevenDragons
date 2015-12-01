@@ -63,7 +63,13 @@ AnimalCardFactory::AnimalCardFactory(){
 
 //fonction simplement pour aller chercher le Deck
 Deck<shared_ptr<AnimalCard>> AnimalCardFactory::getDeck(){
-	return deck;
+	if (deck.size()>0){
+		return deck;
+	}
+	else{
+		throw MissingCard("Le deck et vide");
+	}
+	
 }
 
 
