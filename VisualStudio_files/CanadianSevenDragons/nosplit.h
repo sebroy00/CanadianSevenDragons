@@ -1,11 +1,14 @@
+#include"animalcard.h"
+
 #ifndef NOSPLIT_H
 #define NOSPLIT_H
-#include"animalcard.h"
+
 using namespace std;
 
 class NoSplit : public AnimalCard {
 
 public:
+	NoSplit(){};
 	/*Constructeur 1 paramametre*/
 	NoSplit(char animal) {
 		for (int i = 0; i < 4; i++)
