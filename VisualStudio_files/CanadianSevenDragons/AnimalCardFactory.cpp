@@ -2,10 +2,9 @@
 #include "AnimalCardFactory.h"
 
 AnimalCardFactory::AnimalCardFactory(){
-
 	//pour les 20 cartes, il faut trouver une representation egale de tout les animaux
 	//il y a 3 animaux par carte, donc un total de 60 animaux doivent etre genere
-	vector<char> a;
+	vector<char> a(60);
 	for (int i = 0; i < 12; i++)
 	{
 		a[i*5+0] = 'b';
@@ -34,7 +33,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	}
 	
 	//recree avec 20 animaux et faire un shuffle
-	vector<string> smallerAnimalSet;
+	vector<string> smallerAnimalSet(20);
 	for (int i = 0; i < 4; i++)
 	{
 		smallerAnimalSet[i * 5 + 0] = 'b';
@@ -67,7 +66,7 @@ Deck<shared_ptr<AnimalCard>> AnimalCardFactory::getDeck(){
 		return deck;
 	}
 	else{
-		throw MissingCard("Le deck et vide");
+		throw MissingCard("Le deck est vide");
 	}
 	
 }

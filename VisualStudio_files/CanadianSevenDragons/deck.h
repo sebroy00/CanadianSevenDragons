@@ -19,7 +19,9 @@ public:
 	T draw(){
 		//faire un shared pointer vide
 		if (size()>0) {
-			return at(size()-1);
+			T tmp(back());
+			pop_back();
+			return tmp;
 		}
 		else{
 			throw MissingCard("Dans la methode draw et le deck est vide");

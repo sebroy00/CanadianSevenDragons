@@ -10,6 +10,8 @@
 #include"player.h"
 #include"exeptions.h"
 #include"actioncard.h"  
+#include"AnimalCardFactory.h"
+#include"deck.h"
 
 
 void TEST_classeTable() {
@@ -92,29 +94,29 @@ void TEST_classeHand() {
 	printHand(h);
 }
 
-void testActionCardConversion() {
-	vector<shared_ptr<AnimalCard> > a(10);
-
-	shared_ptr<ActionCard> ac(new ActionCard());
-
-	a.push_back(ac);
-
-
-	ActionCard new_ac = dynamic_cast<ActionCard&>(*a.back());
-
-	new_ac.test();
-}
+//void testActionCardConversion() {
+//	vector<shared_ptr<AnimalCard> > a(10);
+//
+//	shared_ptr<ActionCard> ac(new ActionCard());
+//
+//	a.push_back(ac);
+//
+//
+//	ActionCard new_ac = dynamic_cast<ActionCard&>(*a.back());
+//
+//	new_ac.test();
+//}
 vector<char> secretAnimals = { 'b','d','h','m','w' };
 int main() {
-	testActionCardConversion();
-	//int in_numPlayers;
-	//cout << "-------Preparation-------" << endl;
-	//cout << "Nombre de joueurs: ";
-	//cin >> in_numPlayers;
-	//cout << endl;
-	///*on doit avoir un nombre entre 2 et 5*/
-	//in_numPlayers = in_numPlayers > 5 ? 5 : in_numPlayers;
-	//in_numPlayers = in_numPlayers < 2 ? 2 : in_numPlayers;
+	//testActionCardConversion();
+	int in_numPlayers;
+	cout << "-------Preparation-------" << endl;
+	cout << "Nombre de joueurs: ";
+	cin >> in_numPlayers;
+	cout << endl;
+	/*on doit avoir un nombre entre 2 et 5*/
+	in_numPlayers = in_numPlayers > 5 ? 5 : in_numPlayers;
+	in_numPlayers = in_numPlayers < 2 ? 2 : in_numPlayers;
 
 	/*shuffle the secret animals*/
 	random_shuffle(secretAnimals.begin(), secretAnimals.end());
@@ -123,15 +125,21 @@ int main() {
 	vector<Player> players(in_numPlayers, Player('0'));
 
 	/*create Deck of cards*/
-	Deck<AnimalCard> deck = Deck<AnimalCard>();
+	AnimalCardFactory acf = AnimalCardFactory();
+
+	Deck<shared_ptr<AnimalCard> > deck = acf.getDeck();
 
 	string name;
-	while (in_numPlayers >= 0) {
-		players[--in_numPlayers] = Player(secretAnimals[in_numPlayers]);
-		cout << "Nom du joueur " << in_numPlayers << ": ";
+	int playersCreated = 0;
+	while (playersCreated < in_numPlayers) {
+		players[playersCreated] = Player(secretAnimals[playersCreated]);
+		cout << "Nom du joueur " << playersCreated << ": ";
 		cin >> name;
-		players[in_numPlayers].setName(name);
-		players[in_numPlayers].hand += deck.draw;
+		players[playersCreated].setName(name);
+		players[playersCreated].hand += deck.draw();
+		players[playersCreated].hand += deck.draw();
+		players[playersCreated].hand += deck.draw();
+		playersCreated++;
 	}
 
 	system("cls");
@@ -150,21 +158,29 @@ int main() {
 
 			cout << "Cartes: " << endl;
 			printHand(p.hand);
+			cout << endl;
 
 			int cardChoice;
 			do {
 				try {
 					cout << "Choix de carte: ";
 					cin >> cardChoice;
-					if (cardChoice < p.hand.noCards && cardChoice > -1) //verif s'il y a vraiment une carte a cette position
+					if (cardChoice < p.hand.noCards() && cardChoice > -1) //verif s'il y a vraiment une carte a cette position
 						if (p.hand[cardChoice]->getAnimalAt(0) < 91) { //lettre majuscule = actioncard
-							ActionCard ac = dynamic_cast<ActionCard&>(*p.hand[cardChoice]);
+							/*Jouer avec le action card*/
+							/*ActionCard ac = dynamic_cast<ActionCard&>(*p.hand[cardChoice]);*/
+							cout << "Action Card Selected" << endl;
 						}
+						else {
+							cout << "Animal Card Selected" << endl;
+						}
+					else
+						cout << "Aucune carte a cette position" << endl;
 				}
 				catch (IllegalPlacement i) {
 					cout << "Position invalide" << endl;
 				}
-			} while (true);
+			} while (cardChoice != 4 /*TEMPORAIRE*/);
 		}
 
 	}
