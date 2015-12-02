@@ -10,7 +10,7 @@ QueryResult WolfAction::query(){
 
 	cout << "Vous avez pige la carte loup!!!" << endl;
 	cout << "Vous pouvez maintenant choisir une carte a retirer pour la mettre dans votre main" << endl;
-
+	/*NE PAS ENLEVER CARTE AU CENTRE ET > 103 (< 0) ...*/
 	QueryResult qr;
 	//rentrer x
 	cout << "x:";

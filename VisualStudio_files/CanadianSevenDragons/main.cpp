@@ -149,19 +149,22 @@ int main() {
 
 	while (!winner) {
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
-			cout << "Tour a " << (*p).getName() << "." << endl;
-			cout << "------------------------" << endl << endl;
+			cout << "Joueur: " << (*p).getName() << endl << endl;
 
 			cout << "Table: " << endl;
+			cout << "------------------------" << endl;
+
 			table.printTable();
 			cout << endl;
+
+			cout << "------------------------" << endl;
 
 			cout << "Cartes: " << endl;
 			printHand((*p).hand);
 			cout << endl;
-			
+
 			bool cardPlaced = false;
-			int cardPosition, xCoord, yCoord, pickCards;
+			int cardPosition, xCoord, yCoord, pickCards, changeOrientation;
 			do {
 				try {
 					cout << endl;
@@ -175,6 +178,17 @@ int main() {
 							cout << "Action Card Selected" << endl;
 						}
 						else {
+							cout << "Changer orientation de la carte? \n oui : 1 -- non : 0 \n";
+							cin >> changeOrientation;
+							if (changeOrientation == 1) {
+								cardChoice->setOrientation(DOWN);
+							}
+							cout << "Carte choisie: ";
+							cout << endl;
+							cardChoice->printRow();
+							cout << endl;
+							cardChoice->printRow();
+							cout << endl;
 							cout << "A quel endroit voulez vous placer la carte?" << endl;
 							cout << "Coordonnee verticale: ";
 							cin >> xCoord;

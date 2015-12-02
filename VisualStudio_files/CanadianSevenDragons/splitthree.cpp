@@ -11,22 +11,22 @@ SplitThree::SplitThree(char animal1, char animal2, char animal3) {
 		d_animals[3] = animal3;
 	}
 	else if (random0to1 == 1) {
-		d_animals[0] = animal2;
-		d_animals[2] = animal1;
 		d_animals[1] = animal1;
-		d_animals[3] = animal3;
+		d_animals[3] = animal1;
+		d_animals[0] = animal2;
+		d_animals[2] = animal3;
 	}
 	else if (random0to1 == 2) {
-		d_animals[0] = animal2;
-		d_animals[1] = animal3;
 		d_animals[2] = animal1;
 		d_animals[3] = animal1;
+		d_animals[0] = animal2;
+		d_animals[1] = animal3;
 	}
 	else if (random0to1 == 3) {
 		d_animals[0] = animal1;
+		d_animals[2] = animal1;
 		d_animals[1] = animal2;
-		d_animals[2] = animal3;
-		d_animals[3] = animal1;
+		d_animals[3] = animal3;
 	}
 }
 void SplitThree::setOrientation(Orientation _orientation) {
