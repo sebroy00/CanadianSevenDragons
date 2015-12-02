@@ -1,4 +1,5 @@
 #include "table.h"
+#include"exeptions.h"
 
 int match(shared_ptr<AnimalCard> around, shared_ptr<AnimalCard> card, int around_coord, int card_coord) {
 	return around->getAnimalAt(around_coord) == card->getAnimalAt(card_coord) /*match of two animals in both cards*/
@@ -9,7 +10,6 @@ int match(shared_ptr<AnimalCard> around, shared_ptr<AnimalCard> card, int around
 
 int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCard> card){
 	int paired[4] = { 0,0,0,0 };
-
 	/*Left*/
 	if (around[0] != 0) {
 		paired[0] |= match(around[0], card, 1, 0); 
@@ -57,8 +57,7 @@ int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 		return 0;
 	}
 	if (table[row][col] != 0) {
-		/*?Throw exception?*/
-		return 0;
+		throw IllegalPlacement("coordonnee existe pas");
 	}
 
 	/*LEFT, TOP, RIGHT, BOTTOM*/
@@ -71,8 +70,7 @@ int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 	int numConnections = isConnected(around, card);
 
 	if (numConnections == 0) {
-		/*?Throw exception?*/
-		return 0;
+		throw IllegalPlacement("aucune connection");
 	}
 	table[row][col] = card;
 	return numConnections;

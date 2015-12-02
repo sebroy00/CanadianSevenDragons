@@ -8,8 +8,8 @@ Hand & Hand::operator+=(std::shared_ptr<AnimalCard> card) {
 Hand & Hand::operator-=(std::shared_ptr<AnimalCard> card) {
 	int lengthBefore = d_animalcards.size();
 	d_animalcards.remove(card);
-	if (d_animalcards.size() < lengthBefore)
-		throw new exception(); //a modifier
+	if (d_animalcards.size() >= lengthBefore)
+		throw exception(); //a modifier
 	return (*this);
 }
 

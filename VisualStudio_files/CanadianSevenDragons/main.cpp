@@ -148,8 +148,8 @@ int main() {
 	Table table = Table();
 
 	while (!winner) {
-		for each (Player p in players) {
-			cout << "Tour a " << p.getName() << "." << endl;
+		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
+			cout << "Tour a " << (*p).getName() << "." << endl;
 			cout << "------------------------" << endl << endl;
 
 			cout << "Table: " << endl;
@@ -157,30 +157,48 @@ int main() {
 			cout << endl;
 
 			cout << "Cartes: " << endl;
-			printHand(p.hand);
+			printHand((*p).hand);
 			cout << endl;
-
-			int cardChoice;
+			
+			bool cardPlaced = false;
+			int cardPosition, xCoord, yCoord, pickCards;
 			do {
 				try {
+					cout << endl;
 					cout << "Choix de carte: ";
-					cin >> cardChoice;
-					if (cardChoice < p.hand.noCards() && cardChoice > -1) //verif s'il y a vraiment une carte a cette position
-						if (p.hand[cardChoice]->getAnimalAt(0) < 91) { //lettre majuscule = actioncard
+					cin >> cardPosition;
+					if (cardPosition < (*p).hand.noCards() && cardPosition > -1) { //verif s'il y a vraiment une carte a cette position
+						shared_ptr<AnimalCard> cardChoice = (*p).hand[cardPosition];
+						if (cardChoice->getAnimalAt(0) < 91) { //lettre majuscule = actioncard
 							/*Jouer avec le action card*/
-							/*ActionCard ac = dynamic_cast<ActionCard&>(*p.hand[cardChoice]);*/
+							/*ActionCard ac = dynamic_cast<ActionCard&>(*(*p).hand[cardChoice]);*/
 							cout << "Action Card Selected" << endl;
 						}
 						else {
-							cout << "Animal Card Selected" << endl;
+							cout << "A quel endroit voulez vous placer la carte?" << endl;
+							cout << "Coordonnee verticale: ";
+							cin >> xCoord;
+							cout << "Coordonnee horizontale :";
+							cin >> yCoord;
+							pickCards = table.addAt(cardChoice, xCoord, yCoord);
+							(*p).hand -= cardChoice; /*on enleve la carte selectionnee*/
+							while (pickCards > 0) {
+								(*p).hand += deck.draw(); /*pige les cartes d'apres la valeur retournee par addAt*/
+								pickCards--;
+							}
+							cardPlaced = true; /*tour est fini*/
 						}
-					else
+					}
+					else {
 						cout << "Aucune carte a cette position" << endl;
+					}
 				}
 				catch (IllegalPlacement i) {
-					cout << "Position invalide" << endl;
+					i.report();
 				}
-			} while (cardChoice != 4 /*TEMPORAIRE*/);
+			} while (!cardPlaced);
+			system("cls");
+			cardPlaced = false;
 		}
 
 	}
