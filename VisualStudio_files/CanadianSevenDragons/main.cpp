@@ -8,7 +8,8 @@
 #include"table.h"
 #include"hand.h"
 #include"player.h"
-#include"deck.h"
+#include"exeptions.h"
+#include"actioncard.h"  
 
 
 void TEST_classeTable() {
@@ -91,19 +92,32 @@ void TEST_classeHand() {
 	printHand(h);
 }
 
+void testActionCardConversion() {
+	vector<shared_ptr<AnimalCard> > a(10);
+
+	shared_ptr<ActionCard> ac(new ActionCard());
+
+	a.push_back(ac);
+
+
+	ActionCard new_ac = dynamic_cast<ActionCard&>(*a.back());
+
+	new_ac.test();
+}
 vector<char> secretAnimals = { 'b','d','h','m','w' };
 int main() {
-	int in_numPlayers;
-	cout << "-------Preparation-------" << endl;
-	cout << "Nombre de joueurs: ";
-	cin >> in_numPlayers;
-	cout << endl;
-	/*on doit avoir un nombre entre 2 et 5*/
-	in_numPlayers = in_numPlayers > 5 ? 5 : in_numPlayers;
-	in_numPlayers = in_numPlayers < 2 ? 2 : in_numPlayers;
+	testActionCardConversion();
+	//int in_numPlayers;
+	//cout << "-------Preparation-------" << endl;
+	//cout << "Nombre de joueurs: ";
+	//cin >> in_numPlayers;
+	//cout << endl;
+	///*on doit avoir un nombre entre 2 et 5*/
+	//in_numPlayers = in_numPlayers > 5 ? 5 : in_numPlayers;
+	//in_numPlayers = in_numPlayers < 2 ? 2 : in_numPlayers;
 
 	/*shuffle the secret animals*/
-	random_shuffle(secretAnimals.begin(), secretAnimals.end()); 
+	random_shuffle(secretAnimals.begin(), secretAnimals.end());
 
 	/*create all players, in a vector*/
 	vector<Player> players(in_numPlayers, Player('0'));
@@ -137,19 +151,30 @@ int main() {
 			cout << "Cartes: " << endl;
 			printHand(p.hand);
 
+			int cardChoice;
 			do {
-
+				try {
+					cout << "Choix de carte: ";
+					cin >> cardChoice;
+					if (cardChoice < p.hand.noCards && cardChoice > -1) //verif s'il y a vraiment une carte a cette position
+						if (p.hand[cardChoice]->getAnimalAt(0) < 91) { //lettre majuscule = actioncard
+							ActionCard ac = dynamic_cast<ActionCard&>(*p.hand[cardChoice]);
+						}
+				}
+				catch (IllegalPlacement i) {
+					cout << "Position invalide" << endl;
+				}
 			} while (true);
 		}
 
 	}
 	//array of players ? PROBLEM : different secretCards
-	
-
-	
 
 
-	
+
+
+
+
 	return 0;
 }
 

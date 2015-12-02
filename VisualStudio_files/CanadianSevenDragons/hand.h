@@ -7,7 +7,7 @@
 #include "animalcard.h"
 
 class Hand {
-	std::list<shared_ptr<AnimalCard> > a = list<shared_ptr<AnimalCard> >();
+	std::list<shared_ptr<AnimalCard> > d_animalcards = list<shared_ptr<AnimalCard> >();
 public:
 	/*Ajoute une carte dans la main du joueur*/
 	Hand& operator+=(std::shared_ptr<AnimalCard>);
