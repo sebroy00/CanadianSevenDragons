@@ -11,15 +11,15 @@
 
 using namespace std;
 
-template<class T>
-class Deck : public vector<T>{
+template<typename T>
+class Deck : public vector<shared_ptr<T>>{
 
 public:
 	//try to get the element on top
-	T draw(){
+	shared_ptr<T> draw(){
 		//faire un shared pointer vide
 		if (size()>0) {
-			T tmp(back());
+			shared_ptr<T> tmp(back());
 			pop_back();
 			return tmp;
 		}

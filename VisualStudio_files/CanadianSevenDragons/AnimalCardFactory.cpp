@@ -2,6 +2,9 @@
 #include "AnimalCardFactory.h"
 
 AnimalCardFactory::AnimalCardFactory(){
+
+
+
 	//pour les 20 cartes, il faut trouver une representation egale de tout les animaux
 	//il y a 3 animaux par carte, donc un total de 60 animaux doivent etre genere
 	vector<char> a(60);
@@ -20,7 +23,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	//faire un array de 60 animaux
 	for (int i = 0; i < 20; i++)
 	{
-		deck.push_back(shared_ptr<AnimalCard>(new SplitThree(a[i * 3 + 0], a[i * 3 + 1], a[i * 3 + 2])));
+		deck.push_back(shared_ptr<SplitThree>(new SplitThree(a[i * 3 + 0], a[i * 3 + 1], a[i * 3 + 2])));
 	}
 	
 	//faire un autre shuffle des 60 animaux
@@ -29,7 +32,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	//15 cartes
 	for (int i = 0; i < 15; i++)
 	{
-		deck.push_back(shared_ptr<AnimalCard>(new SplitFour(a[i * 4 + 0], a[i * 4 + 1], a[i * 4 + 2], a[i * 4 + 3])));
+		deck.push_back(shared_ptr<SplitFour>(new SplitFour(a[i * 4 + 0], a[i * 4 + 1], a[i * 4 + 2], a[i * 4 + 3])));
 	}
 	
 	//recree avec 20 animaux et faire un shuffle
@@ -47,21 +50,23 @@ AnimalCardFactory::AnimalCardFactory(){
 	
 	for (int i = 0; i < 10; i++)
 	{
-		deck.push_back(shared_ptr<AnimalCard>(new SplitTwo(a[i * 2 + 0], a[i * 2 + 1])));
+		deck.push_back(shared_ptr<SplitTwo>(new SplitTwo(a[i * 2 + 0], a[i * 2 + 1])));
 	}
 
-	deck.push_back(shared_ptr<ActionCard>(new BearAction()));
-	deck.push_back(shared_ptr<ActionCard>(new DeerAction()));
-	deck.push_back(shared_ptr<ActionCard>(new MooseAction()));
-	deck.push_back(shared_ptr<ActionCard>(new WolfAction()));
-	deck.push_back(shared_ptr<ActionCard>(new HareAction()));
+	deck.push_back(shared_ptr<BearAction>(new BearAction()));
+	deck.push_back(shared_ptr<DeerAction>(new DeerAction()));
+	deck.push_back(shared_ptr<MooseAction>(new MooseAction()));
+	deck.push_back(shared_ptr<WolfAction>(new WolfAction()));
+	deck.push_back(shared_ptr<HareAction>(new HareAction()));
 	deck.push_back(shared_ptr<Joker>(new Joker()));
 	
+	cout << typeid(deck.back()).name() << endl;
+
 	random_shuffle(deck.begin(), deck.end());
 }
 
 //fonction simplement pour aller chercher le Deck
-Deck<shared_ptr<AnimalCard>> AnimalCardFactory::getDeck(){
+Deck<AnimalCard> AnimalCardFactory::getDeck(){
 	if (deck.size()>0){
 		return deck;
 	}

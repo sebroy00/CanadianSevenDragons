@@ -44,6 +44,8 @@ void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 }
 
 QueryResult HareAction::query(){
+	cout << "Vous avez la carte Hare Action. Vous pouvez maintenant. Avec quel joueur souhaiteriez vous changer votre main" << endl;
+
 	QueryResult qr;
 	return qr;
 }
@@ -53,6 +55,8 @@ void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
 }
 
 QueryResult DeerAction::query(){
+	cout << "Vous avez la carte Deer Action. Vous pouvez maintenant. Avec quel joueur souhaiteriez vous changer votre main" << endl;
+
 	QueryResult qr;
 	return qr;
 }
@@ -61,6 +65,8 @@ void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 }
 
 QueryResult MooseAction::query(){
+	cout << "Vous avez la carte MooseAction. Vous pouvez maintenant. Avec quel joueur souhaiteriez vous changer votre main" << endl;
+
 	QueryResult qr;
 	return qr;
 }

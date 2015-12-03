@@ -127,8 +127,10 @@ int main() {
 	/*create Deck of cards*/
 	AnimalCardFactory acf = AnimalCardFactory();
 
-	Deck<shared_ptr<AnimalCard> > deck = acf.getDeck();
-
+	char a;
+	cin >> a;
+	Deck<AnimalCard > deck = acf.getDeck();
+	
 	string name;
 	int playersCreated = 0;
 	while (playersCreated < in_numPlayers) {
@@ -171,10 +173,18 @@ int main() {
 					cout << "Choix de carte: ";
 					cin >> cardPosition;
 					if (cardPosition < (*p).hand.noCards() && cardPosition > -1) { //verif s'il y a vraiment une carte a cette position
-						shared_ptr<AnimalCard> cardChoice = (*p).hand[cardPosition];
-						if (cardChoice->getAnimalAt(0) < 91) { //lettre majuscule = actioncard
+						
+						shared_ptr<AnimalCard> cardChoice = (*p).hand[cardPosition]; \
+						AnimalCard* cardTest = cardChoice.get();
+
+						//essayer de faire un cast
+						if (dynamic_cast<ActionCard*>(cardTest)) { //lettre majuscule = actioncard
 							/*Jouer avec le action card*/
 							/*ActionCard ac = dynamic_cast<ActionCard&>(*(*p).hand[cardChoice]);*/
+							//cardChoice->query();
+							if (dynamic_cast<ActionCard*>(cardTest)){
+								
+							}
 							cout << "Action Card Selected" << endl;
 						}
 						else {
@@ -217,7 +227,7 @@ int main() {
 
 	}
 	//array of players ? PROBLEM : different secretCards
-
+	
 
 
 

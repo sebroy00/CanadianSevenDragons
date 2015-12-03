@@ -20,7 +20,7 @@ enum Animal{loup, ours, orignal, lievre, cerf};
 class AnimalCardFactory{
 
 	//5 ActionCard, 10 SplitTwo, 20 SplitThree and 15 SplitFour
-	Deck<shared_ptr<AnimalCard>> deck;
+	Deck<AnimalCard> deck;
 
 public:
 	
@@ -30,7 +30,7 @@ public:
 	static AnimalCardFactory* getFactory();
 	
 	/*Representation de AnimalCard avec sharec pointers. Le Deck devrait etre un template class*/
-	Deck <shared_ptr<AnimalCard>> getDeck();
+	Deck <AnimalCard> getDeck();
 
 };
 

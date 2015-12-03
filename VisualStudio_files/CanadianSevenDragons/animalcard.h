@@ -30,6 +30,7 @@ public: //a determiner
 	virtual bool findAnimal(char) = 0;
 
 	virtual char getAnimalAt(int) = 0;
+
 };
 
 #endif // !ANIMALCARD_H
