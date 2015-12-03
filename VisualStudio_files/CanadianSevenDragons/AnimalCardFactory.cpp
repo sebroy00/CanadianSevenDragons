@@ -54,6 +54,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	}
 
 	deck.push_back(shared_ptr<BearAction>(new BearAction()));
+	//dynamic_cast<BearAction*>(deck.back().get())->query();
 	deck.push_back(shared_ptr<DeerAction>(new DeerAction()));
 	deck.push_back(shared_ptr<MooseAction>(new MooseAction()));
 	deck.push_back(shared_ptr<WolfAction>(new WolfAction()));

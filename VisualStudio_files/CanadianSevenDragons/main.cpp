@@ -184,7 +184,11 @@ int main() {
 							//cardChoice->query();
 							if (dynamic_cast<BearAction*>(cardTest)){
 								BearAction* ba = dynamic_cast<BearAction*>(cardTest); 
-								ba->query();
+								QueryResult qr = ba->query();
+								qr.nombreDeJoueurs = in_numPlayers;
+								qr.nomDuJoueur = p->getName();
+								ba->perform(table, &players[0], qr);
+
 							}
 							else if (dynamic_cast<WolfAction*>(cardTest)){
 								WolfAction* ba = dynamic_cast<WolfAction*>(cardTest);

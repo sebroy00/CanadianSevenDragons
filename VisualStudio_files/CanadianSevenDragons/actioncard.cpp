@@ -30,17 +30,53 @@ void WolfAction::perform(Table &_table, Player *_player, QueryResult _query){
 
 QueryResult BearAction::query(){
 
-	cout << "Vous avez la carte Bear Action. Vous pouvez maintenant. Avec quel joueur souhaiteriez vous changer votre main" << endl;
+	cout << "Vous avez la carte Bear Action. Avec quel joueur souhaiteriez vous changer votre main" << endl;
 	
 	//Imprimer les joueurs
 	
 	QueryResult qa;
+	string nomDuJoueur;
+	cin >> nomDuJoueur;
+	cout << "Vous avex choisi de changer de main avec " << nomDuJoueur<<endl;
+	qa.action = nomDuJoueur;
 	return qa;
 
 }
 
 void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 
+
+
+	//trouvver le joueur avec qui faire le changement
+	int de, a;
+	bool trouveJoueur = false;
+	do{
+		for (int i = 0; i < qr.nombreDeJoueurs; i++){
+			if (_player[i].getName() == qr.nomDuJoueur){
+				de = i;
+			}
+			if (_player[i].getName() == qr.action){
+				a = i;
+				trouveJoueur = true;
+			}
+		}
+		if (!trouveJoueur){
+			cout << "Votre joueur n a as pu etre trouve, vous pouvez selecctionner le joueur:" << endl;
+			for (int i = 0; i < qr.nombreDeJoueurs; i++){
+				cout << i << ". " << _player[i].getName() << endl;
+			}
+			cout << "Numero du joueur: ";
+			cin >> a;
+			if (0<a<qr.nombreDeJoueurs && a!=de){
+				trouveJoueur = true;
+				qr.action = _player[a].getName();
+			}
+		}
+	} while (trouveJoueur);
+
+	
+
+	swap(_player[de].hand, _player[a].hand);
 }
 
 QueryResult HareAction::query(){

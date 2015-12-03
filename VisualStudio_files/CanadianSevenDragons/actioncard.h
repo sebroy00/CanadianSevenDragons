@@ -11,6 +11,10 @@ using namespace std;
 struct QueryResult{
 	string action;
 	string getX, getY;
+	string endX, endY;
+	int nombreDeJoueurs;
+	string nomDuJoueur;
+	
 };
 
 class ActionCard : public NoSplit {
