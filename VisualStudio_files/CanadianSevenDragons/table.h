@@ -11,7 +11,7 @@
 
 using namespace std;
 
-const int NUM_L(103), NUM_C = 103, MID = 52, WIN = 12;
+const int NUM_L(103), NUM_C = 103, MID = 52, WIN = 3 /*TEMPORARIRE WIN*/;
 class Table {
 
 	shared_ptr<AnimalCard> table[NUM_L][NUM_C];
