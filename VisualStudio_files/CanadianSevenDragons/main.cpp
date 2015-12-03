@@ -182,8 +182,24 @@ int main() {
 							/*Jouer avec le action card*/
 							/*ActionCard ac = dynamic_cast<ActionCard&>(*(*p).hand[cardChoice]);*/
 							//cardChoice->query();
-							if (dynamic_cast<ActionCard*>(cardTest)){
-								
+							if (dynamic_cast<BearAction*>(cardTest)){
+								BearAction* ba = dynamic_cast<BearAction*>(cardTest); 
+								ba->query();
+							}
+							else if (dynamic_cast<WolfAction*>(cardTest)){
+								WolfAction* ba = dynamic_cast<WolfAction*>(cardTest);
+								ba->query();
+							}
+							else if (dynamic_cast<HareAction*>(cardTest)){
+								HareAction* ba = dynamic_cast<HareAction*>(cardTest);
+								ba->query();
+							}
+							else if (dynamic_cast<DeerAction*>(cardTest)){
+								DeerAction* ba = dynamic_cast<DeerAction*>(cardTest);
+								ba->query();
+							}else if (dynamic_cast<MooseAction*>(cardTest)){
+								MooseAction* ba = dynamic_cast<MooseAction*>(cardTest);
+								ba->query();
 							}
 							cout << "Action Card Selected" << endl;
 						}
