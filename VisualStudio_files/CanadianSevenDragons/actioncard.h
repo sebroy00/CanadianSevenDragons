@@ -10,7 +10,7 @@ using namespace std;
 
 struct QueryResult{
 	string action;
-	string getX, getY;
+	int getX, getY;
 	string endX, endY;
 	int nombreDeJoueurs;
 	string nomDuJoueur;

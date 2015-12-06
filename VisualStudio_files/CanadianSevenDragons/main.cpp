@@ -128,7 +128,7 @@ int main() {
 	AnimalCardFactory acf = AnimalCardFactory();
 
 
-	Deck<shared_ptr<AnimalCard> > deck = acf.getDeck();
+	Deck<AnimalCard> deck = acf.getDeck();
 	char a;
 
 	string name;
@@ -179,10 +179,9 @@ int main() {
 						AnimalCard* cardTest = cardChoice.get();
 
 						//essayer de faire un cast
-						if (dynamic_cast<ActionCard*>(cardTest)) { //lettre majuscule = actioncard
-							/*Jouer avec le action card*/
-							/*ActionCard ac = dynamic_cast<ActionCard&>(*(*p).hand[cardChoice]);*/
-							//cardChoice->query();
+						if (dynamic_cast<ActionCard*>(cardTest)) { //essayer de faire le cast a un action card
+							
+							//voir quelle carte d'action a ete joue
 							if (dynamic_cast<BearAction*>(cardTest)){
 								BearAction* ba = dynamic_cast<BearAction*>(cardTest); 
 								QueryResult qr = ba->query();
@@ -191,7 +190,10 @@ int main() {
 								ba->perform(table, &players[0], qr);
 							}
 							else if (dynamic_cast<WolfAction*>(cardTest)){
+								//enlever une carte du la table
 								WolfAction* ba = dynamic_cast<WolfAction*>(cardTest);
+								QueryResult qr = ba->query();
+								qr.nomDuJoueur = p->getName();
 								ba->query();
 							}
 							else if (dynamic_cast<HareAction*>(cardTest)){
