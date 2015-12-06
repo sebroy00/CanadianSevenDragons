@@ -148,7 +148,7 @@ Changer la carte action d'un joueur a un autre
 void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 	int de, a;
 	bool trouveJoueur = false;
-	QueryResult qr;
+	
 	do{
 		for (int i = 0; i < qr.nombreDeJoueurs; i++){
 			if (_player[i].getName() == qr.nomDuJoueur){
