@@ -98,15 +98,35 @@ void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 	swap(_player[de].hand, _player[a].hand);
 }
 
-/*chercher la carte a changer sur le tableau, getX, getY, etX, setY*/
+/*chercher la carte a changer sur le tableau, getX, getY, etX, setY, tester les bonnes coordonnee dans la main*/
 
 QueryResult HareAction::query(){
 	cout << "Vous avez la carte d'action lievre, veuillez donner l'emplacement de la carte que vous voulez changer " << endl;
+	
+	QueryResult qr;
+	cout << "Start X:";
+	cin >> qr.getX;
+	cout << endl;
+	cout << "Start Y";
+	cin >> qr.getY;
+	cout << endl;
+	cout << "End X";
+	cin >> qr.endX;
+	cout << endl;
+	cout << "End Y";
+	cin >> qr.endY;
+	return qr;
 }
+
+/*
+Changer les cartes
+Les emplacement devraient etre valides
+*/
 
 void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
 
-	
+	shared_ptr<AnimalCard> tempStart = _table.pickAt(qr.getX, qr.getY);
+	_table.addAt(tempStart, qr.endX, qr.endY);
 }
 
 /*

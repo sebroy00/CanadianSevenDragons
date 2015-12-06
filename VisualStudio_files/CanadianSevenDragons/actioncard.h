@@ -11,7 +11,7 @@ using namespace std;
 struct QueryResult{
 	string action;
 	int getX, getY;
-	string endX, endY;
+	int endX, endY;
 	int nombreDeJoueurs;
 	string nomDuJoueur;
 	
