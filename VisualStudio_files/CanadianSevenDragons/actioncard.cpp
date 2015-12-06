@@ -98,10 +98,21 @@ void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 	swap(_player[de].hand, _player[a].hand);
 }
 
+/*chercher la carte a changer sur le tableau, getX, getY, etX, setY*/
+
+QueryResult HareAction::query(){
+	cout << "Vous avez la carte d'action lievre, veuillez donner l'emplacement de la carte que vous voulez changer " << endl;
+}
+
+void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
+
+	
+}
+
 /*
 Simplement aller chercher la carte action qu'il faut changer
 */
-QueryResult HareAction::query(){
+QueryResult DeerAction::query(){
 	cout << "Vous avez la carte Hare Action. Avec quel joueur souhaiteriez vous changer votre carte objectif" << endl;
 
 	QueryResult qa;
@@ -111,14 +122,10 @@ QueryResult HareAction::query(){
 	qa.action = nomDuJoueur;
 	return qa;
 }
-
 /*
 Changer la carte action d'un joueur a un autre
 */
-
-
-void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
-
+void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 	int de, a;
 	bool trouveJoueur = false;
 	QueryResult qr;
@@ -152,38 +159,47 @@ void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
 	char tempDeAnimal = _player[de].getSecretAnimal();
 	_player[a].swapSecretAnimal(tempDeAnimal);
 	_player[de].swapSecretAnimal(tempAAnimal);
+
+	
 }
 
 /*
 Pas besoins de query
 */
-QueryResult DeerAction::query(){
-	cout << "Vous avez la carte Deer Action" << endl;
-
-	QueryResult qr;
-	return qr;
-}
-
-/*
-tourner les cartes secretes et les cartes objectifs passent au joueur plus haut
-*/
-void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
-	
-
-	//garder la carte objectif du premier joueur
-	for (int a = 0; a < qr.nombreDeJoueurs; a++){
-		
-	}
-
-}
-
 QueryResult MooseAction::query(){
 	cout << "Vous avez la carte MooseAction. Vous pouvez maintenant. Avec quel joueur souhaiteriez vous changer votre main" << endl;
 
 	QueryResult qr;
 	return qr;
 }
+/*
+tourner les cartes secretes et les cartes objectifs passent au joueur plus haut
+*/
 void MooseAction::perform(Table & _table, Player * _player, QueryResult qr){
+
+	//garder la carte objectif du premier joueur
+	char dernierOCard = _player[qr.nombreDeJoueurs - 1].getSecretAnimal();
+
+	//Montrer les cartes objectifs 
+	cout << "Voici les cartes objectifs de tout les joueurs" << endl;
+	for (int i = 0; i < qr.nombreDeJoueurs; i++)
+	{
+		cout << _player[i].getName() << " : " << _player[i].getSecretAnimal() << endl;
+	}
+	cout << "Les cartes seront pousse au prochain joueur, l'animal du dernier joueur va au premier joueur" << endl;
+	for (int a = 0; a < qr.nombreDeJoueurs; a++){
+		char tSC = _player[a].getSecretAnimal();
+		_player[a + 1].swapSecretAnimal(tSC);
+	}
+	_player[0].swapSecretAnimal(dernierOCard);
+
+	//pour tester
+	cout << "Voici les cartes objectifs de tout les joueurs" << endl;
+	for (int i = 0; i < qr.nombreDeJoueurs; i++)
+	{
+		cout << _player[i].getName() << " : " << _player[i].getSecretAnimal() << endl;
+	}
+
 
 }
 
