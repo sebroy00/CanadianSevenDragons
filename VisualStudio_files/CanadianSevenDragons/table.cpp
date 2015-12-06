@@ -76,6 +76,7 @@ int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 	return numConnections;
 }
 
+
 std::shared_ptr<AnimalCard> Table::pickAt(int row, int col) {
 	shared_ptr<AnimalCard> tmp = table[row][col];
 	table[row][col] = shared_ptr<AnimalCard>();

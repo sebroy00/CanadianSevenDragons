@@ -180,32 +180,43 @@ int main() {
 
 						//essayer de faire un cast
 						if (dynamic_cast<ActionCard*>(cardTest)) { //essayer de faire le cast a un action card
-							
+							QueryResult qr;
+							qr.nombreDeJoueurs = in_numPlayers;
+							qr.nomDuJoueur = p->getName();
 							//voir quelle carte d'action a ete joue
 							if (dynamic_cast<BearAction*>(cardTest)){
 								BearAction* ba = dynamic_cast<BearAction*>(cardTest); 
-								QueryResult qr = ba->query();
-								qr.nombreDeJoueurs = in_numPlayers;
-								qr.nomDuJoueur = p->getName();
+								qr = ba->query();
 								ba->perform(table, &players[0], qr);
 							}
 							else if (dynamic_cast<WolfAction*>(cardTest)){
 								//enlever une carte du la table
 								WolfAction* ba = dynamic_cast<WolfAction*>(cardTest);
-								QueryResult qr = ba->query();
-								qr.nomDuJoueur = p->getName();
-								ba->query();
+								qr = ba->query();
+								bool validCard = false;
+								while (!validCard){
+									if (table.get(qr.getX, qr.getY)){
+										validCard = true;
+									}
+									else{
+										qr = ba->query();
+									}
+								}
+								ba->perform(table, &players[0], qr);
 							}
 							else if (dynamic_cast<HareAction*>(cardTest)){
-								HareAction* ba = dynamic_cast<HareAction*>(cardTest);
-								ba->query();
+								HareAction* ha = dynamic_cast<HareAction*>(cardTest);
+								qr = ha->query();
+								table.addAt(table.get(qr.getX, qr.getY), qr.endX, qr.endY);
 							}
 							else if (dynamic_cast<DeerAction*>(cardTest)){
-								DeerAction* ba = dynamic_cast<DeerAction*>(cardTest);
-								ba->query();
+								DeerAction* da = dynamic_cast<DeerAction*>(cardTest);
+								qr = da->query();
+								da->perform(table, &players[0], qr);
 							}else if (dynamic_cast<MooseAction*>(cardTest)){
-								MooseAction* ba = dynamic_cast<MooseAction*>(cardTest);
-								ba->query();
+								MooseAction* ma = dynamic_cast<MooseAction*>(cardTest);
+								qr = ma->query();
+								ma->perform(table, &players[0], qr);
 							}
 							cout << "Action Card Selected" << endl;
 						}

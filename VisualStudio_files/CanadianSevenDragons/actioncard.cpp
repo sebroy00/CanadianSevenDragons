@@ -160,7 +160,7 @@ void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 			}
 		}
 		if (!trouveJoueur){
-			cout << "Votre joueur n a as pu etre trouve, vous pouvez selecctionner le joueur:" << endl;
+			cout << "Votre joueur n a as pu etre trouve, vous pouvez selectionner le joueur:" << endl;
 			for (int i = 0; i < qr.nombreDeJoueurs; i++){
 				cout << i << ". " << _player[i].getName() << endl;
 			}
