@@ -91,7 +91,7 @@ bool Table::win(char & animal) {
 	for (int l = 0; l < NUM_L; l++)
 		for (int c = 0; c < NUM_C; c++) {
 			if (table[l][c] != 0)
-				if (table[l][c]->findAnimal(animal)) //a modifier en fonction de la classe Animal
+				if (table[l][c]->findAnimal(animal) || table[l][c]->findAnimal('j')) //a modifier en fonction de la classe Animal
 					count++;
 		}
 	return (count >= WIN);

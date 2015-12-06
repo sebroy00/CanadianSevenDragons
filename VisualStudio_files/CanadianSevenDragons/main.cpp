@@ -127,10 +127,10 @@ int main() {
 	/*create Deck of cards*/
 	AnimalCardFactory acf = AnimalCardFactory();
 
+
+	Deck<shared_ptr<AnimalCard> > deck = acf.getDeck();
 	char a;
-	cin >> a;
-	Deck<AnimalCard > deck = acf.getDeck();
-	
+
 	string name;
 	int playersCreated = 0;
 	while (playersCreated < in_numPlayers) {
@@ -146,7 +146,7 @@ int main() {
 
 	system("cls");
 
-	bool winner = false;
+	bool winner(false);
 	Table table = Table();
 
 	while (!winner) {
@@ -170,6 +170,7 @@ int main() {
 			do {
 				try {
 					cout << endl;
+					cout << "Carte secrete: " << (*p).getSecretAnimal() << endl;
 					cout << "Choix de carte: ";
 					cin >> cardPosition;
 					if (cardPosition < (*p).hand.noCards() && cardPosition > -1) { //verif s'il y a vraiment une carte a cette position
@@ -219,9 +220,9 @@ int main() {
 							cardChoice->printRow();
 							cout << endl;
 							cout << "A quel endroit voulez vous placer la carte?" << endl;
-							cout << "Coordonnee verticale: ";
+							cout << "Coordonnee verticale:    ";
 							cin >> xCoord;
-							cout << "Coordonnee horizontale :";
+							cout << "Coordonnee horizontale:  ";
 							cin >> yCoord;
 							pickCards = table.addAt(cardChoice, xCoord, yCoord);
 							(*p).hand -= cardChoice; /*on enleve la carte selectionnee*/
@@ -240,13 +241,18 @@ int main() {
 					i.report();
 				}
 			} while (!cardPlaced);
+			/*Verification s'il y a un gagnant*/
+			for (vector<Player>::iterator w = players.begin(); w != players.end() && !winner; w++) {
+				a = (*w).getSecretAnimal();
+				winner = table.win(a);
+			}
 			system("cls");
 			cardPlaced = false;
 		}
-
 	}
 	//array of players ? PROBLEM : different secretCards
-	
+
+	cout << "winner: " << a; 
 
 
 
