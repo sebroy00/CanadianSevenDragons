@@ -71,6 +71,7 @@ void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 	//trouvver le joueur avec qui faire le changement
 	int de, a;
 	bool trouveJoueur = false;
+
 	do{
 		for (int i = 0; i < qr.nombreDeJoueurs; i++){
 			if (_player[i].getName() == qr.nomDuJoueur){
@@ -82,13 +83,13 @@ void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 			}
 		}
 		if (!trouveJoueur){
-			cout << "Votre joueur n a as pu etre trouve, vous pouvez selecctionner le joueur:" << endl;
+			cout << "Votre joueur n a as pu etre trouve, vous pouvez selectionner le joueur: " << endl;
 			for (int i = 0; i < qr.nombreDeJoueurs; i++){
 				cout << i << ". " << _player[i].getName() << endl;
 			}
 			cout << "Numero du joueur: ";
 			cin >> a;
-			if (0<a<qr.nombreDeJoueurs && a!=de){
+			if (0 < a < qr.nombreDeJoueurs && a != de){
 				trouveJoueur = true;
 				qr.action = _player[a].getName();
 			}

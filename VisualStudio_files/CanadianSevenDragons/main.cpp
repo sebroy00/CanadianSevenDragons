@@ -94,6 +94,40 @@ void TEST_classeHand() {
 	printHand(h);
 }
 
+void TEST_actions(Table &_table, Player *p){
+
+	//Ajouter quelques cartes au tableau
+	shared_ptr<AnimalCard> ac = shared_ptr<AnimalCard>(new SplitFour('b', 'd', 'h', 'm'));
+	
+	_table.addAt(ac, 51,52);
+	_table.printTable();
+
+	_table.addAt(ac, 53, 52);
+
+	shared_ptr<AnimalCard> animalTwo = shared_ptr<AnimalCard>(new SplitTwo('b','d'));
+	shared_ptr<AnimalCard> animalThree = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
+	shared_ptr<AnimalCard> animalFour = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
+	shared_ptr<AnimalCard> animalFive = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
+
+	_table.addAt(animalTwo, 52, 51);
+	_table.addAt(animalThree, 52, 50);
+	_table.addAt(animalFour, 52, 49);
+	_table.addAt(animalFive, 52, 48);
+	
+	_table.printTable();
+
+	//tester les fonctions actions avec les cartes
+	QueryResult qr;
+	qr.nombreDeJoueurs = 2;
+	qr.nomDuJoueur = "pat";
+	qr.action = "nic";
+
+	BearAction * ba = new BearAction();
+	ba->perform(_table, &p[0], qr);
+	//ba->perform(_table, &p[0], qr);
+
+}
+
 //void testActionCardConversion() {
 //	vector<shared_ptr<AnimalCard> > a(10);
 //
@@ -123,12 +157,11 @@ int main() {
 
 	/*create all players, in a vector*/
 	vector<Player> players(in_numPlayers, Player('0'));
-
+	
 	/*create Deck of cards*/
 	AnimalCardFactory acf = AnimalCardFactory();
-
-
 	Deck<AnimalCard> deck = acf.getDeck();
+	
 	char a;
 
 	string name;
@@ -149,6 +182,8 @@ int main() {
 	bool winner(false);
 	Table table = Table();
 
+	TEST_actions(table, &players[0]);
+	
 	while (!winner) {
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
 			cout << "Joueur: " << (*p).getName() << endl << endl;

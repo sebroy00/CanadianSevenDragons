@@ -21,6 +21,6 @@ public:
 	TEST_METHOD(TestMethodName)
 	{
 		// Run a function under test here.
-		Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
-	}
-}
+		//Assert::AreEqual(expectedValue, actualValue, L"message", LINE_INFO());
+	};
+};
