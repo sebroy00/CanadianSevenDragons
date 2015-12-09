@@ -33,7 +33,7 @@ public:
 class Joker :public NoSplit {
 
 public:
-	Joker() :  NoSplit('o') {};
+	Joker() :  NoSplit('j') {};
 };
 
 class StartCard :public NoSplit {
