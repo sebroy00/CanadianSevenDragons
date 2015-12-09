@@ -4,18 +4,18 @@ SplitTwo::SplitTwo(char animal1, char animal2) {
 	srand(time(0));
 	int random0to1 = rand() % 2;
 
-	//if (random0to1 == 0) {
+	if (random0to1 == 0) {
 		d_animals[0] = animal1;
 		d_animals[1] = animal1;
 		d_animals[2] = animal2;
 		d_animals[3] = animal2;
-	/*}
+	}
 	else {
 		d_animals[0] = animal1;
 		d_animals[2] = animal1;
 		d_animals[1] = animal2;
 		d_animals[3] = animal2;
-	}*/
+	}
 }
 
 void SplitTwo::setOrientation(Orientation _orientation) {

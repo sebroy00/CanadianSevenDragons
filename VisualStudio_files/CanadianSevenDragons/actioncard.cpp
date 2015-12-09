@@ -107,16 +107,16 @@ QueryResult HareAction::query(){
 	cout << "Vous avez la carte d'action lievre, veuillez donner l'emplacement de la carte que vous voulez changer " << endl;
 	
 	QueryResult qr;
-	cout << "Start column:";
+	cout << "Start row:";
 	cin >> qr.getX;
 	cout << endl;
-	cout << "Start row";
+	cout << "Start column";
 	cin >> qr.getY;
 	cout << endl;
-	cout << "End column";
+	cout << "End row";
 	cin >> qr.endX;
 	cout << endl;
-	cout << "End row";
+	cout << "End column";
 	cin >> qr.endY;
 	return qr;
 }
@@ -129,14 +129,24 @@ Les emplacement devraient etre valides
 void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
 
 	shared_ptr<AnimalCard> tempStart = _table.pickAt(qr.getX, qr.getY);
-	_table.addAt(tempStart, qr.endX, qr.endY);
+
+	bool emplacementValide = false;
+	int connections = 0;
+	while (!emplacementValide)
+	{
+		connections = _table.addAt(tempStart, qr.endX, qr.endY);
+		if (connections){
+			emplacementValide = true;
+		}
+	}
+	
 }
 
 /*
 Simplement aller chercher la carte action qu'il faut changer
 */
 QueryResult DeerAction::query(){
-	cout << "Vous avez la carte Hare Action. Avec quel joueur souhaiteriez vous changer votre carte objectif" << endl;
+	cout << "Vous avez la carte Deer Action. Avec quel joueur souhaiteriez vous changer votre carte objectif" << endl;
 
 	QueryResult qa;
 	string nomDuJoueur;
@@ -151,7 +161,8 @@ Changer la carte action d'un joueur a un autre
 void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 	int de, a;
 	bool trouveJoueur = false;
-	
+	cout << "Nom demande" << qr.nomDuJoueur << endl;
+	cout << "Nom a " << qr.action << endl;
 	do{
 		for (int i = 0; i < qr.nombreDeJoueurs; i++){
 			if (_player[i].getName() == qr.nomDuJoueur){
@@ -162,6 +173,7 @@ void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 				trouveJoueur = true;
 			}
 		}
+
 		if (!trouveJoueur){
 			cout << "Votre joueur n a as pu etre trouve, vous pouvez selectionner le joueur:" << endl;
 			for (int i = 0; i < qr.nombreDeJoueurs; i++){
@@ -174,7 +186,7 @@ void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 				qr.action = _player[a].getName();
 			}
 		}
-	} while (trouveJoueur);
+	} while (!trouveJoueur);
 
 	//faire un swap des cards objectifs
 	//Gave on the left hand assignement of the getAniml function

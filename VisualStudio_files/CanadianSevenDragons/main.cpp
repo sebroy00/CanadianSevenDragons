@@ -133,14 +133,24 @@ void TEST_Moose(Table &_table, Player *p){
 	ma->perform(_table, p, qr);
 }
 
-void TEST_Original(Table &_table, Player *p){
 
+
+void TEST_cerf(Table &_table, Player *p){
+
+	//voir si on peut echanger la carte action d'un joueur a un autre
+	DeerAction *da = new DeerAction();
+	QueryResult qr;
+	qr = da->query();
+	qr.nombreDeJoueurs = 4;
+	qr.nomDuJoueur = "seb";
+	cout << p[1].getSecretAnimal()<<endl;
+	cout << p[3].getSecretAnimal() << endl;
+	da->perform(_table, p, qr);
+	cout << p[1].getSecretAnimal() << endl;
+	cout << p[3].getSecretAnimal() << endl;
 }
 
-void TEST_Lievre(Table &_table, Player *p){
-
-}
-
+//test loup et lievre
 void TEST_Loup(Table & _table, Player *p){
 	//Ajouter quelques cartes au tableau
 	shared_ptr<AnimalCard> ac = shared_ptr<AnimalCard>(new SplitFour('b', 'd', 'h', 'm'));
@@ -171,7 +181,7 @@ void TEST_Loup(Table & _table, Player *p){
 	HareAction *ha = new HareAction();
 	QueryResult qrr = ha->query();
 
-	while (!_table.get(qrr.getX,qrr.getY)){
+	while (!_table.get(qrr.getX, qrr.getY)){
 		qrr = ha->query();
 	}
 
@@ -179,41 +189,6 @@ void TEST_Loup(Table & _table, Player *p){
 
 	cout << "Fini query" << endl;
 	//ba->perform(_table, &p[0], qr);
-}
-
-void TEST_actions(Table &_table, Player *p){
-
-	//Ajouter quelques cartes au tableau
-	shared_ptr<AnimalCard> ac = shared_ptr<AnimalCard>(new SplitFour('b', 'd', 'h', 'm'));
-	
-	_table.addAt(ac, 51,52);
-	_table.printTable();
-
-	_table.addAt(ac, 53, 52);
-
-	shared_ptr<AnimalCard> animalTwo = shared_ptr<AnimalCard>(new SplitTwo('b','d'));
-	shared_ptr<AnimalCard> animalThree = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
-	shared_ptr<AnimalCard> animalFour = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
-	shared_ptr<AnimalCard> animalFive = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
-
-	_table.addAt(animalTwo, 52, 51);
-	_table.addAt(animalThree, 52, 50);
-	_table.addAt(animalFour, 52, 49);
-	_table.addAt(animalFive, 52, 48);
-	
-	_table.printTable();
-
-	//tester les fonctions actions avec les cartes
-	QueryResult qr;
-	qr.nombreDeJoueurs = 2;
-	qr.nomDuJoueur = "pat";
-	qr.action = "nic";
-
-	BearAction * ba = new BearAction();
-
-	ba->perform(_table, &p[0], qr);
-	//ba->perform(_table, &p[0], qr);
-
 }
 
 //void testActionCardConversion() {
@@ -282,7 +257,8 @@ int main() {
 	//TEST_ours(table, &players[0]);
 	//TEST_Moose(table, &players[0]);
 
-	TEST_Loup(table, &players[0]);
+	//TEST_Loup(table, &players[0]);
+	//TEST_cerf(table, &players[0]);
 	while (!winner) {
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
 			/*imprime le nom du joueur*/
@@ -322,43 +298,56 @@ int main() {
 						/*essayer de faire un cast*/
 						if (dynamic_cast<ActionCard*>(cardTest)) { /*essayer de faire le cast a un action card*/
 							QueryResult qr;
-							qr.nombreDeJoueurs = in_numPlayers;
-							qr.nomDuJoueur = p->getName();
+							
 							//voir quelle carte d'action a ete joue
 							if (dynamic_cast<BearAction*>(cardTest)) {
 								BearAction* ba = dynamic_cast<BearAction*>(cardTest);
 								qr = ba->query();
+								qr.nombreDeJoueurs = in_numPlayers;
+								qr.nomDuJoueur = p->getName();
 								ba->perform(table, &players[0], qr);
 							}
 							else if (dynamic_cast<WolfAction*>(cardTest)) {
-								/*enlever une carte de la table*/
-								WolfAction* ba = dynamic_cast<WolfAction*>(cardTest);
-								qr = ba->query();
-								bool validCard = false;
-								while (!validCard) {
-									if (table.get(qr.getX, qr.getY))
-										validCard = true;
-									else 
-										qr = ba->query();
+
+								WolfAction* wa = dynamic_cast<WolfAction*>(cardTest);
+								qr = wa->query();
+								qr.nombreDeJoueurs = in_numPlayers;
+								qr.nomDuJoueur = p->getName();
+								while (!table.get(qr.getX, qr.getY)){
+									qr = wa->query();
 								}
-								ba->perform(table, &players[0], qr);
+								wa->perform(table, &players[0], qr);
+
 							}
 							else if (dynamic_cast<HareAction*>(cardTest)) {
+
 								HareAction* ha = dynamic_cast<HareAction*>(cardTest);
 								qr = ha->query();
-								table.addAt(table.get(qr.getX, qr.getY), qr.endX, qr.endY);
+								qr.nombreDeJoueurs = in_numPlayers;
+								qr.nomDuJoueur = p->getName();
+								while (!table.get(qr.getX, qr.getY)){
+									qr = ha->query();
+								}
+								ha->perform(table, &p[0], qr);
+
 							}
 							else if (dynamic_cast<DeerAction*>(cardTest)) {
+
 								DeerAction* da = dynamic_cast<DeerAction*>(cardTest);
 								qr = da->query();
+								qr.nombreDeJoueurs = in_numPlayers;
+								qr.nomDuJoueur = p->getName();
 								da->perform(table, &players[0], qr);
+
 							}
 							else if (dynamic_cast<MooseAction*>(cardTest)) {
 								MooseAction* ma = dynamic_cast<MooseAction*>(cardTest);
 								qr = ma->query();
+								qr.nombreDeJoueurs = in_numPlayers;
+								qr.nomDuJoueur = p->getName();
 								ma->perform(table, &players[0], qr);
 							}
-							cout << "Action Card Selected" << endl;
+							(*p).hand -= cardChoice;
 						}
 						else {
 							/*changer orientation*/
