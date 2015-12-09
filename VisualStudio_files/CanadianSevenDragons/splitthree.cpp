@@ -1,28 +1,27 @@
 #include "splitthree.h"
 
 SplitThree::SplitThree(char animal1, char animal2, char animal3) {
-	srand(time(0));
-	int random0to1 = rand() % 3;
+	int random0to3 = rand() % 4;
 
-	if (random0to1 == 0) {
+	if (random0to3 == 0) {
 		d_animals[0] = animal1;
 		d_animals[1] = animal1;
 		d_animals[2] = animal2;
 		d_animals[3] = animal3;
 	}
-	else if (random0to1 == 1) {
+	else if (random0to3 == 1) {
 		d_animals[1] = animal1;
 		d_animals[3] = animal1;
 		d_animals[0] = animal2;
 		d_animals[2] = animal3;
 	}
-	else if (random0to1 == 2) {
+	else if (random0to3 == 2) {
 		d_animals[2] = animal1;
 		d_animals[3] = animal1;
 		d_animals[0] = animal2;
 		d_animals[1] = animal3;
 	}
-	else if (random0to1 == 3) {
+	else if (random0to3 == 3) {
 		d_animals[0] = animal1;
 		d_animals[2] = animal1;
 		d_animals[1] = animal2;
