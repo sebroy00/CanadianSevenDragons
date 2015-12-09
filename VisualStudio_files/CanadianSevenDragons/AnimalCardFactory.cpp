@@ -2,7 +2,9 @@
 #include "AnimalCardFactory.h"
 
 AnimalCardFactory::AnimalCardFactory(){
-
+	/*shuffle device*/
+	std::random_device rd;
+	std::mt19937 mt(rd());
 	
 	//il y a 3 animaux par carte, donc un total de 60 animaux doivent etre genere
 	//ensuite faire sur que toute les triples soient differents pour generer 20 cartes uniques
@@ -16,7 +18,7 @@ AnimalCardFactory::AnimalCardFactory(){
 		a[i*5+3] = 'h';
 		a[i*5+4] = 'd';
 	}
-	random_shuffle(a.begin(), a.end());
+	shuffle(a.begin(), a.end(), mt);
 
 	vector<string> tripples;
 	bool differentes = false;
@@ -35,7 +37,7 @@ AnimalCardFactory::AnimalCardFactory(){
 		std::sort(tripples.begin(), tripples.end());
 		auto il = std::adjacent_find(tripples.begin(), tripples.end());
 		if (il == tripples.end()){ differentes = true; }
-		else{tripples.clear(); random_shuffle(a.begin(), a.end());}
+		else{tripples.clear(); shuffle(a.begin(), a.end(), mt);}
 	}
 
 	//faire les 20 triples
@@ -45,7 +47,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	}
 	
 	//faire un autre shuffle des 60 animaux
-	random_shuffle(a.begin(), a.end());
+	shuffle(a.begin(), a.end(), mt);
 	
 	//Faire des quad de string et comparer pour faire sur que toute les cartes seront differentes
 	vector<string> quad;
@@ -65,7 +67,7 @@ AnimalCardFactory::AnimalCardFactory(){
 		std::sort(quad.begin(), quad.end());
 		auto il = std::adjacent_find(quad.begin(), quad.end());
 		if (il == quad.end()){ differentes = true; }
-		else{ quad.clear(); random_shuffle(a.begin(), a.end()); }
+		else{ quad.clear(); shuffle(a.begin(), a.end(), mt); }
 	}
 
 	//15 cartes split 4
@@ -85,7 +87,7 @@ AnimalCardFactory::AnimalCardFactory(){
 		smallerAnimalSet[i * 5 + 4] = 'd';
 	}
 
-	random_shuffle(smallerAnimalSet.begin(), smallerAnimalSet.end());
+	shuffle(smallerAnimalSet.begin(), smallerAnimalSet.end(), mt);
 
 	//Faire des paires pour faire sur que toute les carates seront differentes
 	vector<string> pairs;
@@ -102,7 +104,7 @@ AnimalCardFactory::AnimalCardFactory(){
 		std::sort(pairs.begin(), pairs.end());
 		auto il = std::adjacent_find(pairs.begin(), pairs.end());
 		if (il == pairs.end()){ differentes = true; }
-		else{ pairs.clear(); random_shuffle(smallerAnimalSet.begin(), smallerAnimalSet.end()); }
+		else{ pairs.clear(); shuffle(smallerAnimalSet.begin(), smallerAnimalSet.end(), mt); }
 	}
 	
 	for (int i = 0; i < 10; i++)
@@ -121,7 +123,7 @@ AnimalCardFactory::AnimalCardFactory(){
 	
 	deck.push_back(shared_ptr<Joker>(new Joker()));
 
-	random_shuffle(deck.begin(), deck.end());
+	shuffle(deck.begin(), deck.end(), mt);
 }
 
 //fonction simplement pour aller chercher le Deck

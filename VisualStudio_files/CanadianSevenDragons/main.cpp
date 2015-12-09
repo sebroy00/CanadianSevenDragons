@@ -106,9 +106,14 @@ void TEST_classeHand() {
 //
 //	new_ac.test();
 //}
-vector<char> secretAnimals = { 'b','d','h','m','w' };
+
 int main() {
-	//testActionCardConversion();
+	vector<char> secretAnimals = { 'b','d','h','m','w' };
+
+	/*shuffle device*/
+	std::random_device rd;
+	std::mt19937 mt(rd());
+
 	int in_numPlayers;
 	cout << "-------Preparation-------" << endl;
 	cout << "Nombre de joueurs: ";
@@ -119,7 +124,7 @@ int main() {
 	in_numPlayers = in_numPlayers < 2 ? 2 : in_numPlayers;
 
 	/*shuffle the secret animals*/
-	random_shuffle(secretAnimals.begin(), secretAnimals.end());
+	shuffle(secretAnimals.begin(), secretAnimals.end(), mt);
 
 	/*create all players, in a vector*/
 	vector<Player> players(in_numPlayers, Player('0'));
@@ -147,12 +152,18 @@ int main() {
 	system("cls");
 
 	bool winner(false);
+	bool cardPlaced(false);
 	Table table = Table();
+	string orientation;
 
 	while (!winner) {
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
-			cout << "Joueur: " << (*p).getName() << endl << endl;
+			/*imprime le nom du joueur*/
+			cout << "Joueur: " << (*p).getName() << endl;
+			/*imprime sa carte secrete*/
+			cout << "Carte secrete: " << (*p).getSecretAnimal() << endl << endl;
 
+			/*imprime la table*/
 			cout << "Table: " << endl;
 			cout << "------------------------" << endl;
 
@@ -161,59 +172,61 @@ int main() {
 
 			cout << "------------------------" << endl;
 
+			/*imprime la hand du joueur*/
 			cout << "Cartes: " << endl;
 			printHand((*p).hand);
 			cout << endl;
 
-			bool cardPlaced = false;
-			int cardPosition, xCoord, yCoord, pickCards, changeOrientation;
+			int in_cardPosition, in_xCoord, in_yCoord, pickCards, in_changeOrientation;
 			do {
 				try {
+					/*choisir la carte a utiliser*/
 					cout << endl;
-					cout << "Carte secrete: " << (*p).getSecretAnimal() << endl;
-					cout << "Choix de carte: ";
-					cin >> cardPosition;
-					if (cardPosition < (*p).hand.noCards() && cardPosition > -1) { //verif s'il y a vraiment une carte a cette position
-						
-						shared_ptr<AnimalCard> cardChoice = (*p).hand[cardPosition]; \
+					cout << "Choix de carte (99 pour passer son tour): ";
+					cin >> in_cardPosition;
+
+					if (in_cardPosition == 99)
+						break;
+					else if (in_cardPosition < (*p).hand.noCards() && in_cardPosition > -1) { //verif s'il y a vraiment une carte a cette position
+
+						shared_ptr<AnimalCard> cardChoice = (*p).hand[in_cardPosition]; 
 						AnimalCard* cardTest = cardChoice.get();
 
-						//essayer de faire un cast
-						if (dynamic_cast<ActionCard*>(cardTest)) { //essayer de faire le cast a un action card
+						/*essayer de faire un cast*/
+						if (dynamic_cast<ActionCard*>(cardTest)) { /*essayer de faire le cast a un action card*/
 							QueryResult qr;
 							qr.nombreDeJoueurs = in_numPlayers;
 							qr.nomDuJoueur = p->getName();
 							//voir quelle carte d'action a ete joue
-							if (dynamic_cast<BearAction*>(cardTest)){
-								BearAction* ba = dynamic_cast<BearAction*>(cardTest); 
+							if (dynamic_cast<BearAction*>(cardTest)) {
+								BearAction* ba = dynamic_cast<BearAction*>(cardTest);
 								qr = ba->query();
 								ba->perform(table, &players[0], qr);
 							}
-							else if (dynamic_cast<WolfAction*>(cardTest)){
-								//enlever une carte du la table
+							else if (dynamic_cast<WolfAction*>(cardTest)) {
+								/*enlever une carte de la table*/
 								WolfAction* ba = dynamic_cast<WolfAction*>(cardTest);
 								qr = ba->query();
 								bool validCard = false;
-								while (!validCard){
-									if (table.get(qr.getX, qr.getY)){
+								while (!validCard) {
+									if (table.get(qr.getX, qr.getY))
 										validCard = true;
-									}
-									else{
+									else 
 										qr = ba->query();
-									}
 								}
 								ba->perform(table, &players[0], qr);
 							}
-							else if (dynamic_cast<HareAction*>(cardTest)){
+							else if (dynamic_cast<HareAction*>(cardTest)) {
 								HareAction* ha = dynamic_cast<HareAction*>(cardTest);
 								qr = ha->query();
 								table.addAt(table.get(qr.getX, qr.getY), qr.endX, qr.endY);
 							}
-							else if (dynamic_cast<DeerAction*>(cardTest)){
+							else if (dynamic_cast<DeerAction*>(cardTest)) {
 								DeerAction* da = dynamic_cast<DeerAction*>(cardTest);
 								qr = da->query();
 								da->perform(table, &players[0], qr);
-							}else if (dynamic_cast<MooseAction*>(cardTest)){
+							}
+							else if (dynamic_cast<MooseAction*>(cardTest)) {
 								MooseAction* ma = dynamic_cast<MooseAction*>(cardTest);
 								qr = ma->query();
 								ma->perform(table, &players[0], qr);
@@ -221,29 +234,43 @@ int main() {
 							cout << "Action Card Selected" << endl;
 						}
 						else {
+							/*changer orientation*/
 							cout << "Changer orientation de la carte? \n oui : 1 -- non : 0 \n";
-							cin >> changeOrientation;
-							if (changeOrientation == 1) {
-								cardChoice->setOrientation(DOWN);
+							cin >> in_changeOrientation;
+							if (in_changeOrientation == 1) {
+								cout << "Quelle orientation? (D = DOWN ; U = UP)";
+								cin >> orientation;
+								cardChoice->setOrientation(orientation == "D" ? DOWN : UP);
 							}
+
+							/*imprime la carte (avec son changement d'orientation s'il y a lieu*/
 							cout << "Carte choisie: ";
 							cout << endl;
 							cardChoice->printRow();
 							cout << endl;
 							cardChoice->printRow();
 							cout << endl;
+
+							/*placement de carte*/
 							cout << "A quel endroit voulez vous placer la carte?" << endl;
 							cout << "Coordonnee verticale:    ";
-							cin >> xCoord;
+							cin >> in_xCoord;
 							cout << "Coordonnee horizontale:  ";
-							cin >> yCoord;
-							pickCards = table.addAt(cardChoice, xCoord, yCoord);
-							(*p).hand -= cardChoice; /*on enleve la carte selectionnee*/
+							cin >> in_yCoord;
+
+							/*ajouter carte sur la table*/
+							pickCards = table.addAt(cardChoice, in_xCoord, in_yCoord);
+							/*on enleve la carte de la hand du joueur*/
+							(*p).hand -= cardChoice;
+
+							/*pige les cartes du deck pour le mettre dans la hand du joueur d'apres la valeur retournee par addAt*/
 							while (pickCards > 0) {
-								(*p).hand += deck.draw(); /*pige les cartes d'apres la valeur retournee par addAt*/
+								(*p).hand += deck.draw();
 								pickCards--;
 							}
-							cardPlaced = true; /*tour est fini*/
+
+							/*le tour du joueur est fini*/
+							cardPlaced = true;
 						}
 					}
 					else {
@@ -254,23 +281,21 @@ int main() {
 					i.report();
 				}
 			} while (!cardPlaced);
+
 			/*Verification s'il y a un gagnant*/
 			for (vector<Player>::iterator w = players.begin(); w != players.end() && !winner; w++) {
 				a = (*w).getSecretAnimal();
 				winner = table.win(a);
 			}
-			system("cls");
-			cardPlaced = false;
+
+			system("cls"); /*clear screen*/
+			cardPlaced = false; /*reset les valeurs pour le prochain joueur*/
 		}
 	}
-	//array of players ? PROBLEM : different secretCards
-
-	cout << "winner: " << a; 
-
-
-
-
-
+	/*trouver joueur gagnant*/ /*------------------------------------------------------*/
+	cout << "winner: " << a;
+	cout << "merci d'avoir joue!";
+	system("pause");
 	return 0;
 }
 
