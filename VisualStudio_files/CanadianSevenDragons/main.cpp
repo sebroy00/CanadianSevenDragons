@@ -1,3 +1,10 @@
+/*
+main.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
+
 #include <fstream>
 #include <vector>
 #include <algorithm>    // std::random_shuffle
@@ -348,6 +355,7 @@ int main() {
 								qr.nomDuJoueur = p->getName();
 								da->perform(table, &players[0], qr);
 								(*p).hand -= cardChoice;
+								
 							}
 							else if (dynamic_cast<MooseAction*>(cardTest)) {
 								MooseAction* ma = dynamic_cast<MooseAction*>(cardTest);
@@ -407,7 +415,7 @@ int main() {
 				catch (IllegalPlacement i) {
 					i.report();
 				}
-			} while (!cardPlaced || playedAction);
+			} while (!cardPlaced && !playedAction);
 
 			/*Verification s'il y a un gagnant*/
 			for (vector<Player>::iterator w = players.begin(); w != players.end() && !winner; w++) {
