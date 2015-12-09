@@ -1,3 +1,9 @@
+/*
+hand.h
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #ifndef HAND_H
 #define HAND_H
 

@@ -1,3 +1,10 @@
+
+/*
+player.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include "player.h"
 
 Player::Player(char _secretAnimal) {

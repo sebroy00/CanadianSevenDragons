@@ -175,17 +175,21 @@ void TEST_Loup(Table & _table, Player *p){
 	//tester les fonctions actions avec les cartes
 	WolfAction *wa = new WolfAction();
 
-	//QueryResult qr = wa->query();
-	//wa->perform(_table, &p[0], qr);
-
-	HareAction *ha = new HareAction();
-	QueryResult qrr = ha->query();
-
-	while (!_table.get(qrr.getX, qrr.getY)){
-		qrr = ha->query();
+	QueryResult qr = wa->query();
+	while (!_table.get(qr.getX, qr.getY)){
+		qr = wa->query();
 	}
+	qr.nomDuJoueur = "a";
+	wa->perform(_table, &p[0], qr);
+	printHand(p[0].hand);
+	//HareAction *ha = new HareAction();
+	//QueryResult qrr = ha->query();
 
-	ha->perform(_table, &p[0], qrr);
+	//while (!_table.get(qrr.getX, qrr.getY)){
+	//	qrr = ha->query();
+	//}
+
+	//ha->perform(_table, &p[0], qrr);
 
 	cout << "Fini query" << endl;
 	//ba->perform(_table, &p[0], qr);
@@ -249,6 +253,7 @@ int main() {
 
 	bool winner(false);
 	bool cardPlaced(false);
+	bool playedAction(false);
 	Table table = Table();
 	string orientation;
 
@@ -259,6 +264,7 @@ int main() {
 
 	//TEST_Loup(table, &players[0]);
 	//TEST_cerf(table, &players[0]);
+
 	while (!winner) {
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
 			/*imprime le nom du joueur*/
@@ -287,6 +293,7 @@ int main() {
 					cout << endl;
 					cout << "Choix de carte (99 pour passer son tour): ";
 					cin >> in_cardPosition;
+					playedAction = false;
 
 					if (in_cardPosition == 99)
 						break;
@@ -301,6 +308,7 @@ int main() {
 							
 							//voir quelle carte d'action a ete joue
 							if (dynamic_cast<BearAction*>(cardTest)) {
+								(*p).hand -= cardChoice;
 								BearAction* ba = dynamic_cast<BearAction*>(cardTest);
 								qr = ba->query();
 								qr.nombreDeJoueurs = in_numPlayers;
@@ -317,7 +325,8 @@ int main() {
 									qr = wa->query();
 								}
 								wa->perform(table, &players[0], qr);
-
+								printHand(p->hand);
+								(*p).hand -= cardChoice;
 							}
 							else if (dynamic_cast<HareAction*>(cardTest)) {
 
@@ -329,7 +338,7 @@ int main() {
 									qr = ha->query();
 								}
 								ha->perform(table, &p[0], qr);
-
+								(*p).hand -= cardChoice;
 							}
 							else if (dynamic_cast<DeerAction*>(cardTest)) {
 
@@ -338,7 +347,7 @@ int main() {
 								qr.nombreDeJoueurs = in_numPlayers;
 								qr.nomDuJoueur = p->getName();
 								da->perform(table, &players[0], qr);
-
+								(*p).hand -= cardChoice;
 							}
 							else if (dynamic_cast<MooseAction*>(cardTest)) {
 								MooseAction* ma = dynamic_cast<MooseAction*>(cardTest);
@@ -346,8 +355,10 @@ int main() {
 								qr.nombreDeJoueurs = in_numPlayers;
 								qr.nomDuJoueur = p->getName();
 								ma->perform(table, &players[0], qr);
+								(*p).hand -= cardChoice;
 							}
-							(*p).hand -= cardChoice;
+							
+							playedAction = true;
 						}
 						else {
 							/*changer orientation*/
@@ -396,7 +407,7 @@ int main() {
 				catch (IllegalPlacement i) {
 					i.report();
 				}
-			} while (!cardPlaced);
+			} while (!cardPlaced || playedAction);
 
 			/*Verification s'il y a un gagnant*/
 			for (vector<Player>::iterator w = players.begin(); w != players.end() && !winner; w++) {

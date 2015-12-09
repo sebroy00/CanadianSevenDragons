@@ -1,3 +1,9 @@
+/*
+splitthree.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include "splitthree.h"
 
 SplitThree::SplitThree(char animal1, char animal2, char animal3) {

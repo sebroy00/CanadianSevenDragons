@@ -1,3 +1,10 @@
+/*
+splittwo.h
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
+
 #include"animalcard.h"
 #include <stdio.h>     
 #include <cstdlib>

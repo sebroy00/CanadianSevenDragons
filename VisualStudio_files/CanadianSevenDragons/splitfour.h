@@ -1,3 +1,9 @@
+/*
+splitfour.h
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include"animalcard.h"
 
 #ifndef SPLITFOUR_H

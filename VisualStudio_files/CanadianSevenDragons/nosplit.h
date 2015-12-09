@@ -1,3 +1,9 @@
+/*
+nosplit.h
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include"animalcard.h"
 
 #ifndef NOSPLIT_H

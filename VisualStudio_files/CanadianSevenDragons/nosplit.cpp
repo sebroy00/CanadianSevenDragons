@@ -1,3 +1,9 @@
+/*
+nosplit.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include "nosplit.h"
 
 void NoSplit::setOrientation(Orientation _orientation){

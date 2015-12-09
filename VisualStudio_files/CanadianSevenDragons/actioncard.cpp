@@ -1,3 +1,9 @@
+/*
+actioncard.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include <iostream>
 #include "actioncard.h"
 
@@ -19,14 +25,14 @@ QueryResult WolfAction::query(){
 	qr.getX = 0;
 	qr.getY = 0;
 
-	while (!qr.getX && !qr.getY){
+	while (!qr.getX && !qr.getY && !(qr.getX==52 && qr.getY==52)){
 		cout << "SVP rentrer les coordonnes de la carte a enlever de la table" << endl;
-		//rentrer x
-		cout << "Column :";
-		cin >> qr.getX;
-		cout << endl;
 		//rentrer y
-		cout << "Row :";
+		cout << "Vertical :";
+		cin >> qr.getX;
+		
+		//rentrer x
+		cout << "Horizontal :";
 		cin >> qr.getY;
 		cout << endl;
 	}
@@ -48,7 +54,8 @@ void WolfAction::perform(Table &_table, Player *_player, QueryResult _query){
 	}
 	//enlever la carte du tableau et la remplacer pas un object null
 	//Enlever les points pour les collections
-	_player[playerNum].hand += shared_ptr<AnimalCard>(_table.pickAt(_query.getY, _query.getX));
+	cout << "Numero du joueur " << playerNum << endl;	
+	_player[playerNum].hand += _table.pickAt(_query.getX, _query.getY);
 }
 
 /*
@@ -105,19 +112,21 @@ void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 
 QueryResult HareAction::query(){
 	cout << "Vous avez la carte d'action lievre, veuillez donner l'emplacement de la carte que vous voulez changer " << endl;
-	
 	QueryResult qr;
-	cout << "Start row:";
-	cin >> qr.getX;
-	cout << endl;
-	cout << "Start column";
-	cin >> qr.getY;
-	cout << endl;
-	cout << "End row";
-	cin >> qr.endX;
-	cout << endl;
-	cout << "End column";
-	cin >> qr.endY;
+	while (!qr.getX && !qr.getY && !(qr.getX == 52 && qr.getY == 52)){
+		
+		cout << "Start Vertical:";
+		cin >> qr.getX;
+
+		cout << "Start Horizontal";
+		cin >> qr.getY;
+
+		cout << "End Vertical";
+		cin >> qr.endX;
+
+		cout << "End Horizontal";
+		cin >> qr.endY;
+	}
 	return qr;
 }
 
@@ -132,14 +141,9 @@ void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
 
 	bool emplacementValide = false;
 	int connections = 0;
-	while (!emplacementValide)
-	{
-		connections = _table.addAt(tempStart, qr.endX, qr.endY);
-		if (connections){
-			emplacementValide = true;
-		}
-	}
-	
+
+	connections = _table.addAt(tempStart, qr.endX, qr.endY);
+
 }
 
 /*
@@ -202,7 +206,7 @@ void DeerAction::perform(Table & _table, Player * _player, QueryResult qr){
 Pas besoins de query
 */
 QueryResult MooseAction::query(){
-	cout << "Vous avez la carte MooseAction. Vous pouvez maintenant. Avec quel joueur souhaiteriez vous changer votre main" << endl;
+	cout << "Vous avez la carte MooseAction" << endl;
 
 	QueryResult qr;
 	return qr;
@@ -215,25 +219,12 @@ void MooseAction::perform(Table & _table, Player * _player, QueryResult qr){
 	//garder la carte objectif du premier joueur
 	char dernierOCard = _player[qr.nombreDeJoueurs - 1].getSecretAnimal();
 
-	//Montrer les cartes objectifs 
-	cout << "Voici les cartes objectifs de tout les joueurs" << endl;
-	for (int i = 0; i < qr.nombreDeJoueurs; i++)
-	{
-		cout << _player[i].getName() << " : " << _player[i].getSecretAnimal() << endl;
-	}
-	cout << "Les cartes seront pousse au prochain joueur, l'animal du dernier joueur va au premier joueur" << endl;
+	cout << "Les cartes seront pousse au prochain joueur" << endl;
 	for (int a = qr.nombreDeJoueurs-1; 0<a; a--){
 		char tSC = _player[a-1].getSecretAnimal();
 		_player[a].swapSecretAnimal(tSC);
 	}
 	_player[0].swapSecretAnimal(dernierOCard);
-
-	//pour tester
-	cout << "Voici les cartes objectifs de tout les joueurs" << endl;
-	for (int i = 0; i < qr.nombreDeJoueurs; i++)
-	{
-		cout << _player[i].getName() << " : " << _player[i].getSecretAnimal() << endl;
-	}
 
 
 }

@@ -1,3 +1,9 @@
+/*
+AnimalCardFactory.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include <iostream>
 #include "AnimalCardFactory.h"
 

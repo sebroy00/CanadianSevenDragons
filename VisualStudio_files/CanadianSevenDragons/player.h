@@ -1,3 +1,9 @@
+/*
+player.h
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include<iostream>
 #include"hand.h"
 

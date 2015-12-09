@@ -1,3 +1,9 @@
+/*
+exception.h
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
 

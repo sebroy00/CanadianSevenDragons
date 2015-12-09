@@ -1,3 +1,9 @@
+/*
+table.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include "table.h"
 #include"exeptions.h"
 

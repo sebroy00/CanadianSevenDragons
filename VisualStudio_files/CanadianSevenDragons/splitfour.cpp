@@ -1,3 +1,9 @@
+/*
+splitfour.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include "splitfour.h"
 
 SplitFour::SplitFour(char animal1, char animal2, char animal3, char animal4) {

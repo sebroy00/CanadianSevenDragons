@@ -1,3 +1,9 @@
+/*
+actioncard.h
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include <iostream>
 #include"nosplit.h"
 #include "table.h"

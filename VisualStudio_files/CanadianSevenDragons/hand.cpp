@@ -1,3 +1,9 @@
+/*
+hand.cpp
+Sebastien Roy
+Nicolas Tremblay - 5992713
+*/
+
 #include "hand.h"
 
 Hand & Hand::operator+=(std::shared_ptr<AnimalCard> card) {
