@@ -94,6 +94,93 @@ void TEST_classeHand() {
 	printHand(h);
 }
 
+//changer de main
+
+void TEST_ours(Table &_table, Player *p){
+
+	BearAction *ba = new BearAction();
+	//changer de main de 0 a 1
+	for (int i = 0; i < 5; i++)
+	{
+		//joueur present seb
+		QueryResult qr = ba->query();
+		qr.nombreDeJoueurs = 2;
+		qr.nomDuJoueur = "seb";
+
+		cout << "Main 0:" << endl;
+		printHand(p[0].hand);
+
+		cout << "Main 1:" << endl;
+		printHand(p[1].hand);
+
+		ba->perform(_table, &p[0], qr);
+
+		cout << "Main 0:" << endl;
+		printHand(p[0].hand);
+
+		cout << "Main 1:" << endl;
+		printHand(p[1].hand);
+
+		cout << "Fin de ours" << endl;
+	}
+	
+}
+
+void TEST_Moose(Table &_table, Player *p){
+	MooseAction *ma = new MooseAction();
+	QueryResult qr;
+	qr.nombreDeJoueurs = 5;
+	ma->perform(_table, p, qr);
+}
+
+void TEST_Original(Table &_table, Player *p){
+
+}
+
+void TEST_Lievre(Table &_table, Player *p){
+
+}
+
+void TEST_Loup(Table & _table, Player *p){
+	//Ajouter quelques cartes au tableau
+	shared_ptr<AnimalCard> ac = shared_ptr<AnimalCard>(new SplitFour('b', 'd', 'h', 'm'));
+
+	_table.addAt(ac, 51, 52);
+	_table.printTable();
+
+	_table.addAt(ac, 53, 52);
+
+	shared_ptr<AnimalCard> animalTwo = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
+	shared_ptr<AnimalCard> animalThree = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
+	shared_ptr<AnimalCard> animalFour = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
+	shared_ptr<AnimalCard> animalFive = shared_ptr<AnimalCard>(new SplitTwo('b', 'd'));
+
+	_table.addAt(animalTwo, 52, 51);
+	_table.addAt(animalThree, 52, 50);
+	_table.addAt(animalFour, 52, 49);
+	_table.addAt(animalFive, 52, 48);
+
+	_table.printTable();
+
+	//tester les fonctions actions avec les cartes
+	WolfAction *wa = new WolfAction();
+
+	//QueryResult qr = wa->query();
+	//wa->perform(_table, &p[0], qr);
+
+	HareAction *ha = new HareAction();
+	QueryResult qrr = ha->query();
+
+	while (!_table.get(qrr.getX,qrr.getY)){
+		qrr = ha->query();
+	}
+
+	ha->perform(_table, &p[0], qrr);
+
+	cout << "Fini query" << endl;
+	//ba->perform(_table, &p[0], qr);
+}
+
 void TEST_actions(Table &_table, Player *p){
 
 	//Ajouter quelques cartes au tableau
@@ -123,6 +210,7 @@ void TEST_actions(Table &_table, Player *p){
 	qr.action = "nic";
 
 	BearAction * ba = new BearAction();
+
 	ba->perform(_table, &p[0], qr);
 	//ba->perform(_table, &p[0], qr);
 
@@ -189,8 +277,12 @@ int main() {
 	Table table = Table();
 	string orientation;
 
-	TEST_actions(table, &players[0]);
+	//TEST_actions(table, &players[0]);
 	
+	//TEST_ours(table, &players[0]);
+	//TEST_Moose(table, &players[0]);
+
+	TEST_Loup(table, &players[0]);
 	while (!winner) {
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
 			/*imprime le nom du joueur*/

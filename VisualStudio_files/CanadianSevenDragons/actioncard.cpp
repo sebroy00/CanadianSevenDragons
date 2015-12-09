@@ -19,14 +19,14 @@ QueryResult WolfAction::query(){
 	qr.getX = 0;
 	qr.getY = 0;
 
-	while (!qr.getX && qr.getY){
+	while (!qr.getX && !qr.getY){
 		cout << "SVP rentrer les coordonnes de la carte a enlever de la table" << endl;
 		//rentrer x
-		cout << "x:";
+		cout << "Column :";
 		cin >> qr.getX;
 		cout << endl;
 		//rentrer y
-		cout << "y:";
+		cout << "Row :";
 		cin >> qr.getY;
 		cout << endl;
 	}
@@ -40,13 +40,15 @@ utiliser la fonction pick at
 
 void WolfAction::perform(Table &_table, Player *_player, QueryResult _query){
 	
+	int playerNum = 0;
+	for (int i = 0; i < _query.nombreDeJoueurs; i++){
+		if (_player[i].getName() == _query.nomDuJoueur){
+			playerNum = i;
+		}
+	}
 	//enlever la carte du tableau et la remplacer pas un object null
 	//Enlever les points pour les collections
-	_table.pickAt(_query.getX, _query.getY);
-	
-	//faire sur que la carte a ete enleve
-	cout << typeid(_table.pickAt(_query.getX, _query.getY)).name() << endl;
-
+	_player[playerNum].hand += shared_ptr<AnimalCard>(_table.pickAt(_query.getY, _query.getX));
 }
 
 /*
@@ -94,7 +96,7 @@ void BearAction::perform(Table & _table, Player * _player, QueryResult qr){
 				qr.action = _player[a].getName();
 			}
 		}
-	} while (trouveJoueur);
+	} while (!trouveJoueur);
 
 	swap(_player[de].hand, _player[a].hand);
 }
@@ -105,16 +107,16 @@ QueryResult HareAction::query(){
 	cout << "Vous avez la carte d'action lievre, veuillez donner l'emplacement de la carte que vous voulez changer " << endl;
 	
 	QueryResult qr;
-	cout << "Start X:";
+	cout << "Start column:";
 	cin >> qr.getX;
 	cout << endl;
-	cout << "Start Y";
+	cout << "Start row";
 	cin >> qr.getY;
 	cout << endl;
-	cout << "End X";
+	cout << "End column";
 	cin >> qr.endX;
 	cout << endl;
-	cout << "End Y";
+	cout << "End row";
 	cin >> qr.endY;
 	return qr;
 }
@@ -208,9 +210,9 @@ void MooseAction::perform(Table & _table, Player * _player, QueryResult qr){
 		cout << _player[i].getName() << " : " << _player[i].getSecretAnimal() << endl;
 	}
 	cout << "Les cartes seront pousse au prochain joueur, l'animal du dernier joueur va au premier joueur" << endl;
-	for (int a = 0; a < qr.nombreDeJoueurs; a++){
-		char tSC = _player[a].getSecretAnimal();
-		_player[a + 1].swapSecretAnimal(tSC);
+	for (int a = qr.nombreDeJoueurs-1; 0<a; a--){
+		char tSC = _player[a-1].getSecretAnimal();
+		_player[a].swapSecretAnimal(tSC);
 	}
 	_player[0].swapSecretAnimal(dernierOCard);
 
