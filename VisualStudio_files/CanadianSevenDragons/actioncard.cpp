@@ -19,28 +19,21 @@ Chercher les coordonnees de la carte a aller chercher
 QueryResult WolfAction::query(){
 
 	cout << "Vous pouvez maintenant choisir une carte a retirer pour la mettre dans votre main" << endl;
-	/*NE PAS ENLEVER CARTE AU CENTRE ET > 103 (< 0) ...*/
+
 	QueryResult qr;
-	
 	qr.getX = 0;
 	qr.getY = 0;
 
 	while (!qr.getX && !qr.getY && !(qr.getX==52 && qr.getY==52)){
 		cout << "SVP rentrer les coordonnes de la carte a enlever de la table" << endl;
-		//rentrer y
-		cout << "Vertical :";
-		cin >> qr.getX;
-		
-		//rentrer x
-		cout << "Horizontal :";
-		cin >> qr.getY;
-		cout << endl;
+		cout << "Vertical :   ";cin >> qr.getX;
+		cout << "Horizontal : ";cin >> qr.getY;
 	}
 	return qr;
 }
 
 /*
-Retirer une carte du tableau. 
+Retirer une carte du tableau et la mettre dans la main du joueur selectionne
 utiliser la fonction pick at
 */
 
@@ -52,9 +45,6 @@ void WolfAction::perform(Table &_table, Player *_player, QueryResult _query){
 			playerNum = i;
 		}
 	}
-	//enlever la carte du tableau et la remplacer pas un object null
-	//Enlever les points pour les collections
-	cout << "Numero du joueur " << playerNum << endl;	
 	_player[playerNum].hand += _table.pickAt(_query.getX, _query.getY);
 }
 
@@ -64,7 +54,6 @@ trouver le joueur avec lequel il faut changer la main
 QueryResult BearAction::query(){
 
 	cout << "Vous avez la carte Bear Action. Avec quel joueur souhaiteriez vous changer votre main" << endl;
-	
 	QueryResult qa;
 	string nomDuJoueur;
 	cin >> nomDuJoueur;
