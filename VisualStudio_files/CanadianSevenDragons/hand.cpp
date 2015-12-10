@@ -1,6 +1,6 @@
 /*
 hand.cpp
-Sebastien Roy
+Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 

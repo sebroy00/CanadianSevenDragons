@@ -273,6 +273,7 @@ int main() {
 
 	while (!winner) {
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
+
 			/*imprime le nom du joueur*/
 			cout << "Joueur: " << (*p).getName() << endl;
 			/*imprime sa carte secrete*/
