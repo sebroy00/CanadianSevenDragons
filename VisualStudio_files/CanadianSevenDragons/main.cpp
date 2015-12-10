@@ -299,7 +299,6 @@ int main() {
 					cout << endl;
 					cout << "Choix de carte (99 pour passer son tour): ";
 					cin >> in_cardPosition;
-					playedAction = false;
 
 					if (in_cardPosition == 99)
 						break;
