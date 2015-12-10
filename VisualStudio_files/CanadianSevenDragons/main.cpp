@@ -424,7 +424,7 @@ int main() {
 		}
 	}
 	/*trouver joueur gagnant*/ /*------------------------------------------------------*/
-	cout << "winner: " << a;
+	cout << "winner: " << a<<endl;
 	cout << "merci d'avoir joue!";
 	system("pause");
 	return 0;
