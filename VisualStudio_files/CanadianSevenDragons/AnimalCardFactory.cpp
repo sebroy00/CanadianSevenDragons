@@ -19,7 +19,7 @@ AnimalCardFactory::AnimalCardFactory() {
 
 	/*5 noSplit*/
 	for (int c = 0; c < 5; c++) {
-		deck.push_back(shared_ptr<SplitTwo>(new NoSplit(char_animals[c])));
+		deck.push_back(shared_ptr<NoSplit>(new NoSplit(char_animals[c])));
 	}
 
 	/*10 SplitTwo*/
