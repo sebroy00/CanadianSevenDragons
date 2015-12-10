@@ -4,11 +4,11 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
-#include<iostream>
-#include"hand.h"
-
 #ifndef PLAYER_H
 #define PLAYER_H
+
+#include<iostream>
+#include"hand.h"
 
 using namespace std;
 class Player {

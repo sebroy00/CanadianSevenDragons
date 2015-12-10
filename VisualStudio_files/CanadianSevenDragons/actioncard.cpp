@@ -6,6 +6,7 @@ Nicolas Tremblay - 5992713
 
 #include <iostream>
 #include "actioncard.h"
+#include "exeptions.h"
 
 using namespace std;
 
@@ -38,7 +39,8 @@ utiliser la fonction pick at
 */
 
 void WolfAction::perform(Table &_table, Player *_player, QueryResult _query){
-	
+	if (_query.getX == 52 && _query.getY == 52)
+		throw IllegalPlacement("On ne peut pas enlever la carte de depart");
 	int playerNum = 0;
 	for (int i = 0; i < _query.nombreDeJoueurs; i++){
 		if (_player[i].getName() == _query.nomDuJoueur){
@@ -104,10 +106,11 @@ QueryResult HareAction::query(){
 	QueryResult qr;
 	qr.getX = 0; qr.getY = 0;
 	while (!qr.getX && !qr.getY && !(qr.getX == 52 && qr.getY == 52)){
-		cout << "Start Vertical:";cin >> qr.getX;
-		cout << "Start Horizontal";cin >> qr.getY;
-		cout << "End Vertical";cin >> qr.endX;
-		cout << "End Horizontal";cin >> qr.endY;
+		cout << "Emplacement vertical: ";cin >> qr.getX;
+		cout << "Emplacement horizontal: ";cin >> qr.getY;
+		cout << endl;
+		cout << "Nouvel emplacement vertical: ";cin >> qr.endX;
+		cout << "Nouvel emplacement horizontal: ";cin >> qr.endY;
 	}
 	return qr;
 }
@@ -117,6 +120,8 @@ Changer les cartes, les emplacements devraient etre valides
 */
 
 void HareAction::perform(Table & _table, Player * _player, QueryResult qr){
+	if (qr.getX == 52 && qr.getY == 52)
+		throw IllegalPlacement("On ne peut pas enlever la carte de depart");
 	shared_ptr<AnimalCard> tempStart = _table.pickAt(qr.getX, qr.getY);
 	_table.addAt(tempStart, qr.endX, qr.endY);
 }

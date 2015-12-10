@@ -4,6 +4,8 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
+#ifndef ANIMALCARDFACTORY_D
+#define ANIMALCARDFACTORY_D
 
 #include <iostream>
 #include "animalcard.h"
@@ -18,9 +20,6 @@ Nicolas Tremblay - 5992713
 #include <algorithm>
 #include <random>
 #include <vector>
-
-#ifndef ANIMALCARDFACTORY_D
-#define ANIMALCARDFACTORY_D
 
 enum Animal{loup, ours, orignal, lievre, cerf};
 

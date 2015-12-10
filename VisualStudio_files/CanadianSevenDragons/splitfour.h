@@ -4,10 +4,10 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
-#include"animalcard.h"
-
 #ifndef SPLITFOUR_H
 #define SPLITFOUR_H
+
+#include"animalcard.h"
 
 using namespace std;
 

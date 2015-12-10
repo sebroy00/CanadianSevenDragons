@@ -4,13 +4,13 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
+#ifndef SPLITTHREE_H
+#define SPLITTHREE_H
+
 #include"animalcard.h"
 #include <stdio.h>     
 #include <cstdlib>
 #include <ctime>
-
-#ifndef SPLITTHREE_H
-#define SPLITTHREE_H
 
 using namespace std;
 

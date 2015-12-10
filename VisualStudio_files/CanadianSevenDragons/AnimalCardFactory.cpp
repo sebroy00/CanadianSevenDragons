@@ -1,11 +1,11 @@
 /*
-AnimalCardFactory.cpp
+animalcardfactory.cpp
 Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
 #include <iostream>
-#include "AnimalCardFactory.h"
+#include"animalcardfactory.h"
 
 AnimalCardFactory::AnimalCardFactory() {
 	/*shuffle device*/
@@ -53,57 +53,16 @@ AnimalCardFactory::AnimalCardFactory() {
 		deck.push_back(shared_ptr<WolfAction>(new WolfAction()));
 		deck.push_back(shared_ptr<HareAction>(new HareAction()));
 	}
-	
+
 
 	deck.push_back(shared_ptr<Joker>(new Joker()));
 
-	/*print all deck*/
-	//for (int c = 0; c < 10; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//for (int c = 0; c < 10; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//cout << endl;
-	//for (int c = 10; c < 30; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//for (int c = 10; c < 30; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//cout << endl;
-	//for (int c = 30; c < 45; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//for (int c = 30; c < 45; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//cout << endl;
-	//for (int c = 45; c < 51; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//for (int c = 45; c < 51; c++) {
-	//	deck[c]->printRow();
-	//	cout << " ";
-	//}
-	//cout << endl;
-	//cout << endl;	cout << endl;
-
 	shuffle(deck.begin(), deck.end(), mt);
+}
+
+AnimalCardFactory * AnimalCardFactory::getFactory() {
+	AnimalCardFactory * acf_ptr = new AnimalCardFactory();
+	return acf_ptr;
 }
 
 //fonction simplement pour aller chercher le Deck

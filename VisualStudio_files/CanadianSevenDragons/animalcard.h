@@ -4,11 +4,11 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
-#include<iostream>
-#include<string>
-
 #ifndef ANIMALCARD_H
 #define ANIMALCARD_H
+
+#include<iostream>
+#include<string>
 
 using namespace std;
 

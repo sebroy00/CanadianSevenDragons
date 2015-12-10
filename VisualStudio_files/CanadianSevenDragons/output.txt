@@ -1,0 +1,169 @@
+-------Preparation-------
+Nombre de joueurs: 3
+
+Nom du joueur 0: Sebastien
+Nom du joueur 1: Nicolas
+Nom du joueur 2: Rebecca
+
+Pause game? (Y/N) N
+
+Joueur: Sebastien
+Carte Secrete: b
+
+Table:
+------------------------
+   52
+   __
+52|cc
+  |cc
+
+------------------------
+Cartes:
+0  1  2
+dw md mm
+dw ww mm
+
+
+Choix de carte (99 pour passer son tour): 0
+Changer orientation de la carte? (oui : 1 -- non : 0) 0
+
+Carte choisie:
+dw
+dw
+
+A quel endroit voulez vous placer la carte?
+Coordonnee verticale:    52
+Coordonnee horizontale:  53
+Press any key to continue . . .
+
+Joueur: Nicolas
+Carte Secrete: w
+
+Table:
+------------------------
+   52 53
+   __ __
+52|cc dw
+  |cc dw
+
+------------------------
+Cartes:
+0  1  2
+bh bm mh
+dw bm mh
+
+
+Choix de carte (99 pour passer son tour): 1
+Changer orientation de la carte? (oui : 1 -- non : 0) 0
+
+Carte choisie:
+bm
+bm
+
+A quel endroit voulez vous placer la carte?
+Coordonnee verticale:    53
+Coordonnee horizontale:  52
+Press any key to continue . . .
+
+Joueur: Rebecca
+Carte Secrete: d
+
+Table:
+------------------------
+   52 53
+   __ __
+52|cc dw
+  |cc dw
+53|bm
+  |bm
+
+------------------------
+Cartes:
+0  1  2
+HH db wh
+HH mb wh
+
+
+Choix de carte (99 pour passer son tour): 0
+Vous avez la carte d'action lievre, veuillez donner l'emplacement de la carte que vous voulez changer
+Emplacement vertical: 52
+Emplacement horizontal: 53
+
+Nouvel emplacement vertical: 51
+Nouvel emplacement horizontal: 52
+Press any key to continue . . .
+
+Pause game? (Y/N) N
+
+Joueur: Sebastien
+Carte Secrete: b
+
+Table:
+------------------------
+   52
+   __
+51|dw
+  |dw
+52|cc
+  |cc
+53|bm
+  |bm
+
+------------------------
+Cartes:
+0  1  2
+md mm WW
+ww mm WW
+
+
+Choix de carte (99 pour passer son tour): 99
+
+Joueur: Nicolas
+Carte Secrete: w
+
+Table:
+------------------------
+   52
+   __
+51|dw
+  |dw
+52|cc
+  |cc
+53|bm
+  |bm
+
+------------------------
+Cartes:
+0  1  2  3
+bh mh mw hd
+dw mh bh mb
+
+
+Choix de carte (99 pour passer son tour): 99
+
+Joueur: Rebecca
+Carte Secrete: d
+
+Table:
+------------------------
+   52
+   __
+51|dw
+  |dw
+52|cc
+  |cc
+53|bm
+  |bm
+
+------------------------
+Cartes:
+0  1
+db wh
+mb wh
+
+
+Choix de carte (99 pour passer son tour): 99
+
+Pause game? (Y/N) Y
+
+Press any key to continue . . .
