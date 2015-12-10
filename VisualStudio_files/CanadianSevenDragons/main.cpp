@@ -260,7 +260,6 @@ int main() {
 
 	bool winner(false);
 	bool cardPlaced(false);
-	bool playedAction(false);
 	Table table = Table();
 	string orientation;
 
@@ -366,7 +365,7 @@ int main() {
 								(*p).hand -= cardChoice;
 							}
 							
-							playedAction = true;
+							cardPlaced = true;
 						}
 						else {
 							/*changer orientation*/
@@ -415,7 +414,7 @@ int main() {
 				catch (IllegalPlacement i) {
 					i.report();
 				}
-			} while (!cardPlaced && !playedAction);
+			} while (!cardPlaced);
 
 			/*Verification s'il y a un gagnant*/
 			for (vector<Player>::iterator w = players.begin(); w != players.end() && !winner; w++) {
