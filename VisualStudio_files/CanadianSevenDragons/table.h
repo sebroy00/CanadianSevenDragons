@@ -17,7 +17,7 @@ Nicolas Tremblay - 5992713
 
 using namespace std;
 
-const int NUM_L(103), NUM_C = 103, MID = 52, WIN = 3 /*TEMPORARIRE WIN*/;
+const int NUM_L(103), NUM_C = 103, MID = 52, WIN = 12;
 class Table {
 
 	shared_ptr<AnimalCard> table[NUM_L][NUM_C];
