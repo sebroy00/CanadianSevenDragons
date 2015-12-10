@@ -1,6 +1,6 @@
 /*
 main.cpp
-Sebastien Roy
+Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
@@ -19,6 +19,8 @@ Nicolas Tremblay - 5992713
 #include"actioncard.h"  
 #include"AnimalCardFactory.h"
 #include"deck.h"
+
+using namespace std;
 
 
 void TEST_classeTable() {
@@ -103,7 +105,7 @@ void TEST_classeHand() {
 
 //changer de main
 
-void TEST_ours(Table &_table, Player *p){
+void TEST_ours(Table &_table, Player *p) {
 
 	BearAction *ba = new BearAction();
 	//changer de main de 0 a 1
@@ -130,10 +132,10 @@ void TEST_ours(Table &_table, Player *p){
 
 		cout << "Fin de ours" << endl;
 	}
-	
+
 }
 
-void TEST_Moose(Table &_table, Player *p){
+void TEST_Moose(Table &_table, Player *p) {
 	MooseAction *ma = new MooseAction();
 	QueryResult qr;
 	qr.nombreDeJoueurs = 5;
@@ -142,7 +144,7 @@ void TEST_Moose(Table &_table, Player *p){
 
 
 
-void TEST_cerf(Table &_table, Player *p){
+void TEST_cerf(Table &_table, Player *p) {
 
 	//voir si on peut echanger la carte action d'un joueur a un autre
 	DeerAction *da = new DeerAction();
@@ -150,7 +152,7 @@ void TEST_cerf(Table &_table, Player *p){
 	qr = da->query();
 	qr.nombreDeJoueurs = 4;
 	qr.nomDuJoueur = "seb";
-	cout << p[1].getSecretAnimal()<<endl;
+	cout << p[1].getSecretAnimal() << endl;
 	cout << p[3].getSecretAnimal() << endl;
 	da->perform(_table, p, qr);
 	cout << p[1].getSecretAnimal() << endl;
@@ -158,7 +160,7 @@ void TEST_cerf(Table &_table, Player *p){
 }
 
 //test loup et lievre
-void TEST_Loup(Table & _table, Player *p){
+void TEST_Loup(Table & _table, Player *p) {
 	//Ajouter quelques cartes au tableau
 	shared_ptr<AnimalCard> ac = shared_ptr<AnimalCard>(new SplitFour('b', 'd', 'h', 'm'));
 
@@ -183,7 +185,7 @@ void TEST_Loup(Table & _table, Player *p){
 	WolfAction *wa = new WolfAction();
 
 	QueryResult qr = wa->query();
-	while (!_table.get(qr.getX, qr.getY)){
+	while (!_table.get(qr.getX, qr.getY)) {
 		qr = wa->query();
 	}
 	qr.nomDuJoueur = "a";
@@ -215,6 +217,49 @@ void TEST_Loup(Table & _table, Player *p){
 //	new_ac.test();
 //}
 
+void saveToFile(Deck<AnimalCard> deck, Table table, vector<Player> players) {
+	ofstream saveFile; // création du fichier
+	saveFile.open("saveGAME.txt"); // ouvrir
+	int deckSize = deck.size();
+	saveFile << "Deck: \n";
+	for (int d = 0; d < deckSize; d++) {
+		shared_ptr<AnimalCard> tmp = deck.draw();
+		saveFile << tmp->getAnimalAt(0) << tmp->getAnimalAt(1) << tmp->getAnimalAt(2) << tmp->getAnimalAt(3) << " ";
+	}
+	saveFile << "\n \n";
+
+
+	int numPlayers = players.size();
+	saveFile << "Players: \n \n";
+	for (int a = 0; a < numPlayers; a++) {
+		saveFile << "Player " << a << "\n";
+		saveFile << "--------------\n";
+		saveFile << "Name: " << players.at(a).getName() << "\n";
+		saveFile << "Secret Animal: " << players.at(a).getSecretAnimal() << "\n";
+		for (int d = 0; d < players.at(a).hand.noCards(); d++) {
+			shared_ptr<AnimalCard> tmp = players.at(a).hand[d];
+			if (tmp != 0)
+				saveFile << tmp->getAnimalAt(0) << tmp->getAnimalAt(1) << tmp->getAnimalAt(2) << tmp->getAnimalAt(3) << " ";
+		}
+		saveFile << "\n\n";
+	}
+	saveFile << "\n \n";
+
+	int tableSize = 103;
+	saveFile << "Table: \n";
+	for (int a = 0; a < tableSize; a++)
+		for (int d = 0; d < tableSize; d++) {
+			shared_ptr<AnimalCard> tmp = table.get(a,d);
+			if (tmp != 0)
+				saveFile << tmp->getAnimalAt(0) << tmp->getAnimalAt(1) << tmp->getAnimalAt(2) << tmp->getAnimalAt(3) << " ";
+			else
+				saveFile << "0000" << " ";
+		}
+	saveFile << "\n \n";
+
+	saveFile.close(); // fermer
+}
+
 int main() {
 	vector<char> secretAnimals = { 'b','d','h','m','w' };
 
@@ -236,11 +281,11 @@ int main() {
 
 	/*create all players, in a vector*/
 	vector<Player> players(in_numPlayers, Player('0'));
-	
+
 	/*create Deck of cards*/
 	AnimalCardFactory acf = AnimalCardFactory();
 	Deck<AnimalCard> deck = acf.getDeck();
-	
+
 	char a;
 
 	string name;
@@ -262,9 +307,10 @@ int main() {
 	bool cardPlaced(false);
 	Table table = Table();
 	string orientation;
+	string pause;
 
 	//TEST_actions(table, &players[0]);
-	
+
 	//TEST_ours(table, &players[0]);
 	//TEST_Moose(table, &players[0]);
 
@@ -272,6 +318,10 @@ int main() {
 	//TEST_cerf(table, &players[0]);
 
 	while (!winner) {
+		cout << "Pause game? (Y/N) ";
+		cin >> pause;
+		if (pause == "Y")
+			saveToFile(deck, table, players);
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
 			/*imprime le nom du joueur*/
 			cout << "Joueur: " << (*p).getName() << endl;
@@ -304,13 +354,13 @@ int main() {
 						break;
 					else if (in_cardPosition < (*p).hand.noCards() && in_cardPosition > -1) { //verif s'il y a vraiment une carte a cette position
 
-						shared_ptr<AnimalCard> cardChoice = (*p).hand[in_cardPosition]; 
+						shared_ptr<AnimalCard> cardChoice = (*p).hand[in_cardPosition];
 						AnimalCard* cardTest = cardChoice.get();
 
 						/*essayer de faire un cast*/
 						if (dynamic_cast<ActionCard*>(cardTest)) { /*essayer de faire le cast a un action card*/
 							QueryResult qr;
-							
+
 							//voir quelle carte d'action a ete joue
 							if (dynamic_cast<BearAction*>(cardTest)) {
 								(*p).hand -= cardChoice;
@@ -326,7 +376,7 @@ int main() {
 								qr = wa->query();
 								qr.nombreDeJoueurs = in_numPlayers;
 								qr.nomDuJoueur = p->getName();
-								while (!table.get(qr.getX, qr.getY)){
+								while (!table.get(qr.getX, qr.getY)) {
 									qr = wa->query();
 								}
 								wa->perform(table, &players[0], qr);
@@ -339,7 +389,7 @@ int main() {
 								qr = ha->query();
 								qr.nombreDeJoueurs = in_numPlayers;
 								qr.nomDuJoueur = p->getName();
-								while (!table.get(qr.getX, qr.getY)){
+								while (!table.get(qr.getX, qr.getY)) {
 									qr = ha->query();
 								}
 								ha->perform(table, &p[0], qr);
@@ -353,7 +403,7 @@ int main() {
 								qr.nomDuJoueur = p->getName();
 								da->perform(table, &players[0], qr);
 								(*p).hand -= cardChoice;
-								
+
 							}
 							else if (dynamic_cast<MooseAction*>(cardTest)) {
 								MooseAction* ma = dynamic_cast<MooseAction*>(cardTest);
@@ -363,7 +413,7 @@ int main() {
 								ma->perform(table, &players[0], qr);
 								(*p).hand -= cardChoice;
 							}
-							
+
 							cardPlaced = true;
 						}
 						else {

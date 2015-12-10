@@ -23,7 +23,7 @@ int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCar
 	}
 		if (card->getAnimalAt(0) == card->getAnimalAt(2)) {
 			paired[0] |= paired[2];
-			paired[2] = 0; //on garde le compte pour seulement une carte s'il y a une paire
+			paired[2] = 0; //on garde le compte pour seulement une carte s'il y a un animal a deux endroits
 		}
 	/*Top*/
 	if (around[1] != 0) {
@@ -59,8 +59,7 @@ int isConnected(std::shared_ptr<AnimalCard> around[4], std::shared_ptr<AnimalCar
 int Table::addAt(std::shared_ptr<AnimalCard> card, int row, int col) {
 	/*Utiliser exception illegal placement*/
 	if (row < 0 || col < 0 || row > NUM_L || col > NUM_C) {
-		/*?Throw exception?*/
-		return 0;
+		throw IllegalPlacement("coordonnee existe pas");
 	}
 	if (table[row][col] != 0) {
 		throw IllegalPlacement("coordonnee existe pas");
