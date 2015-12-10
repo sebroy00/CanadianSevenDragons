@@ -16,6 +16,12 @@ AnimalCardFactory::AnimalCardFactory() {
 	srand(time(0));
 
 	vector<char> char_animals = { 'b','d','h','m','w' };
+
+	/*5 noSplit*/
+	for (int c = 0; c < 5; c++) {
+		deck.push_back(shared_ptr<SplitTwo>(new NoSplit(char_animals[c])));
+	}
+
 	/*10 SplitTwo*/
 	for (int c = 0; c < 5; c++) {
 		shuffle(char_animals.begin(), char_animals.end(), mt);
@@ -39,11 +45,15 @@ AnimalCardFactory::AnimalCardFactory() {
 		deck.push_back(shared_ptr<SplitFour>(new SplitFour(char_animals[0], char_animals[1], char_animals[2], char_animals[3])));
 	}
 
-	deck.push_back(shared_ptr<BearAction>(new BearAction()));
-	deck.push_back(shared_ptr<DeerAction>(new DeerAction()));
-	deck.push_back(shared_ptr<MooseAction>(new MooseAction()));
-	deck.push_back(shared_ptr<WolfAction>(new WolfAction()));
-	deck.push_back(shared_ptr<HareAction>(new HareAction()));
+	for (int i = 0; i < 3; i++)
+	{
+		deck.push_back(shared_ptr<BearAction>(new BearAction()));
+		deck.push_back(shared_ptr<DeerAction>(new DeerAction()));
+		deck.push_back(shared_ptr<MooseAction>(new MooseAction()));
+		deck.push_back(shared_ptr<WolfAction>(new WolfAction()));
+		deck.push_back(shared_ptr<HareAction>(new HareAction()));
+	}
+	
 
 	deck.push_back(shared_ptr<Joker>(new Joker()));
 

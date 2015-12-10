@@ -140,8 +140,6 @@ void TEST_Moose(Table &_table, Player *p){
 	ma->perform(_table, p, qr);
 }
 
-
-
 void TEST_cerf(Table &_table, Player *p){
 
 	//voir si on peut echanger la carte action d'un joueur a un autre
@@ -157,7 +155,6 @@ void TEST_cerf(Table &_table, Player *p){
 	cout << p[3].getSecretAnimal() << endl;
 }
 
-//test loup et lievre
 void TEST_Loup(Table & _table, Player *p){
 	//Ajouter quelques cartes au tableau
 	shared_ptr<AnimalCard> ac = shared_ptr<AnimalCard>(new SplitFour('b', 'd', 'h', 'm'));
