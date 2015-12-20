@@ -4,14 +4,13 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
+#ifndef SPLITTWO_H
+#define SPLITTWO_H
 
 #include"animalcard.h"
 #include <stdio.h>     
 #include <cstdlib>
 #include <ctime>
-
-#ifndef SPLITTWO_H
-#define SPLITTWO_H
 
 using namespace std;
 

@@ -23,7 +23,8 @@ char Player::getSecretAnimal() {
 }
 
 void Player::printState() {
-	/*On imprime quoi???*/
+	cout << "Joueur: " << d_name << endl;
+	cout << "Carte Secrete: " << d_secretAnimal << endl << endl;
 }
 
 string Player::getName() {
@@ -33,5 +34,3 @@ string Player::getName() {
 void Player::setName(string _name) {
 	d_name = _name;
 }
-
-

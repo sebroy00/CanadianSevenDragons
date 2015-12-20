@@ -4,16 +4,13 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
+#ifndef TABLE
+#define TABLE
+
 #include <iostream>
 #include <memory>
 #include "animalcard.h"
 #include "nosplit.h"
-
-
-#ifndef TABLE
-#define TABLE
-
-
 
 using namespace std;
 

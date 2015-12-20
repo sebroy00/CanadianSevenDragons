@@ -22,45 +22,6 @@ Nicolas Tremblay - 5992713
 
 using namespace std;
 
-
-void TEST_classeTable() {
-	Table table = Table();
-	shared_ptr<NoSplit> sptr(new NoSplit('a'));
-	shared_ptr<SplitTwo> sptrTWO(new SplitTwo('c', 'o'));
-	shared_ptr<SplitTwo> sptrTHREE(new SplitTwo('o', 'c'));
-
-	shared_ptr<SplitFour> sptr4a(new SplitFour('b', 'a', 'd', 'c'));
-	shared_ptr<SplitFour> sptr4b(new SplitFour('a', 'b', 'c', 'd'));
-	shared_ptr<SplitFour> sptr4c(new SplitFour('b', 'c', 'd', 'a'));
-	shared_ptr<SplitFour> sptr4d(new SplitFour('c', 'd', 'a', 'b'));
-
-	table.addAt(sptr, 5, 50);
-	cout << table.addAt(sptr4a, 52, 53) << endl;
-	cout << table.addAt(sptr, 52, 54) << endl;
-	cout << table.addAt(sptr4d, 52, 55) << endl;
-	table.printTable();
-	cout << endl;
-	cout << "before pick at" << endl;
-	table.pickAt(52, 54);
-	cout << "after pick at" << endl;
-	table.printTable();
-	cout << endl;
-	cout << "add at count: " << table.addAt(sptr, 52, 54) << endl;
-	cout << "after add at" << endl;
-	table.printTable();
-	cout << endl;
-
-	cout << "add at count: " << table.addAt(sptr, 53, 54) << endl;
-	cout << "after add at" << endl;
-	table.printTable();
-	cout << endl;
-
-
-	char animal('a');
-	if (table.win(animal))
-		cout << "win";
-}
-
 void printHand(Hand h) {
 	for (int c = 0; c < 3; c++) {
 		for (int i = 0; i < h.noCards(); i++) {
@@ -74,33 +35,6 @@ void printHand(Hand h) {
 		}
 		cout << endl;
 	}
-}
-
-void TEST_classeHand() {
-	Hand h = Hand();
-	shared_ptr<NoSplit> sptr(new NoSplit('Q'));
-	shared_ptr<NoSplit> sptr2(new NoSplit('P'));
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	h += sptr;
-	h += sptr2;
-	printHand(h);
 }
 
 void saveToFile(Deck<AnimalCard> deck, Table table, vector<Player> players) {
@@ -125,7 +59,7 @@ void saveToFile(Deck<AnimalCard> deck, Table table, vector<Player> players) {
 		for (int d = 0; d < players.at(a).hand.noCards(); d++) {
 			shared_ptr<AnimalCard> tmp = players.at(a).hand[d];
 			if (tmp != 0)
-				saveFile << tmp->getAnimalAt(0) << tmp->getAnimalAt(1) << tmp->getAnimalAt(2) << tmp->getAnimalAt(3) << " ";
+				saveFile << "Cards: " << tmp->getAnimalAt(0) << tmp->getAnimalAt(1) << tmp->getAnimalAt(2) << tmp->getAnimalAt(3) << " ";
 		}
 		saveFile << "\n\n";
 	}
@@ -135,14 +69,13 @@ void saveToFile(Deck<AnimalCard> deck, Table table, vector<Player> players) {
 	saveFile << "Table: \n";
 	for (int a = 0; a < tableSize; a++)
 		for (int d = 0; d < tableSize; d++) {
-			shared_ptr<AnimalCard> tmp = table.get(a,d);
+			shared_ptr<AnimalCard> tmp = table.get(a, d);
 			if (tmp != 0)
 				saveFile << tmp->getAnimalAt(0) << tmp->getAnimalAt(1) << tmp->getAnimalAt(2) << tmp->getAnimalAt(3) << " ";
 			else
 				saveFile << "0000" << " ";
 		}
 	saveFile << "\n \n";
-
 	saveFile.close(); // fermer
 }
 
@@ -195,25 +128,18 @@ int main() {
 	string orientation;
 	string pause;
 
-	//TEST_actions(table, &players[0]);
-
-	//TEST_ours(table, &players[0]);
-	//TEST_Moose(table, &players[0]);
-
-	//TEST_Loup(table, &players[0]);
-	//TEST_cerf(table, &players[0]);
-
 	while (!winner) {
 		cout << "Pause game? (Y/N) ";
 		cin >> pause;
-		if (pause == "Y")
+		cout << endl;
+		if (pause == "Y") {
 			saveToFile(deck, table, players);
+			return 0;
+		}
 		for (vector<Player>::iterator p = players.begin(); p != players.end(); p++) {
 
-			/*imprime le nom du joueur*/
-			cout << "Joueur: " << (*p).getName() << endl;
-			/*imprime sa carte secrete*/
-			cout << "Carte secrete: " << (*p).getSecretAnimal() << endl << endl;
+			/*imprime l'etat du joueur*/
+			(*p).printState();
 
 			/*imprime la table*/
 			cout << "Table: " << endl;
@@ -300,12 +226,12 @@ int main() {
 								ma->perform(table, &players[0], qr);
 								(*p).hand -= cardChoice;
 							}
-
+							system("pause");
 							cardPlaced = true;
 						}
 						else {
 							/*changer orientation*/
-							cout << "Changer orientation de la carte? \n oui : 1 -- non : 0 \n";
+							cout << "Changer orientation de la carte? (oui : 1 -- non : 0) ";
 							cin >> in_changeOrientation;
 							if (in_changeOrientation == 1) {
 								cout << "Quelle orientation? (D = DOWN ; U = UP)";
@@ -314,12 +240,12 @@ int main() {
 							}
 
 							/*imprime la carte (avec son changement d'orientation s'il y a lieu*/
-							cout << "Carte choisie: ";
+							cout << endl << "Carte choisie: ";
 							cout << endl;
 							cardChoice->printRow();
 							cout << endl;
 							cardChoice->printRow();
-							cout << endl;
+							cout << endl << endl;
 
 							/*placement de carte*/
 							cout << "A quel endroit voulez vous placer la carte?" << endl;
@@ -340,6 +266,7 @@ int main() {
 							}
 
 							/*le tour du joueur est fini*/
+							system("pause");
 							cardPlaced = true;
 						}
 					}
@@ -362,10 +289,9 @@ int main() {
 			cardPlaced = false; /*reset les valeurs pour le prochain joueur*/
 		}
 	}
-	/*trouver joueur gagnant*/ /*------------------------------------------------------*/
-	cout << "winner: " << a<<endl;
-	cout << "merci d'avoir joue!";
-	system("pause");
+
+	cout << "Le gagnant est le joueur avec la carte: " << a << endl;
+	cout << "Merci d'avoir joue!";
 	return 0;
 }
 

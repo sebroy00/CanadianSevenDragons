@@ -5,6 +5,7 @@ Nicolas Tremblay - 5992713
 */
 
 #include "hand.h"
+#include "exception.h"
 
 Hand & Hand::operator+=(std::shared_ptr<AnimalCard> card) {
 	d_animalcards.push_back(card);
@@ -15,7 +16,7 @@ Hand & Hand::operator-=(std::shared_ptr<AnimalCard> card) {
 	int lengthBefore = d_animalcards.size();
 	d_animalcards.remove(card);
 	if (d_animalcards.size() >= lengthBefore)
-		throw exception(); //a modifier
+		throw MissingCard("impossible d'enlever cette carte (operateur hand)");
 	return (*this);
 }
 

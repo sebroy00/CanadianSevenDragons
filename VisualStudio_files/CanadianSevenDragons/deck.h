@@ -4,6 +4,9 @@ Sebastien Roy - 7759749
 Nicolas Tremblay - 5992713
 */
 
+#ifndef DECK_H
+#define DECK_H
+
 #include "animalcard.h"
 
 #include <iostream>
@@ -12,8 +15,6 @@ Nicolas Tremblay - 5992713
 
 #include"exeptions.h"
 
-#ifndef DECK_H
-#define DECK_H
 
 using namespace std;
 
